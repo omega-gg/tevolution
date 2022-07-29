@@ -2,7 +2,7 @@
 ---
 [![azure](https://dev.azure.com/bunjee/tevolution/_apis/build/status/omega-gg.tevolution)](https://dev.azure.com/bunjee/tevolution/_build)
 
-[tevolution](https://omega.gg/tevolution) is a Remove Video Screen.<br>
+[tevolution](https://omega.gg/tevolution) is a Remote Video Screen.<br>
 Designed to stream Internet videos from a Semantic Player.<br>
 [omega](https://omega.gg/about) is building tevolution to empower people.<br>
 
