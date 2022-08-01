@@ -3,6 +3,7 @@ SK = $$_PRO_FILE_PWD_/../Sky
 SK_CORE    = $$SK/src/SkCore/src
 SK_GUI     = $$SK/src/SkGui/src
 SK_MEDIA   = $$SK/src/SkMedia/src
+SK_BARCODE = $$SK/src/SkBarcode/src
 SK_TORRENT = $$SK/src/SkTorrent/src
 SK_BACKEND = $$SK/src/SkBackend/src
 
@@ -102,10 +103,12 @@ include(src/vlc/vlc.pri)
 include(src/3rdparty/qtsingleapplication/qtsingleapplication.pri)
 include(src/3rdparty/quazip/quazip.pri)
 include(src/3rdparty/libcharsetdetect/libcharsetdetect.pri)
+include(src/3rdparty/zxing-cpp/zxing-cpp.pri)
 
 INCLUDEPATH += $$SK/include/SkCore \
                $$SK/include/SkGui \
                $$SK/include/SkMedia \
+               $$SK/include/SkBarcode \
                $$SK/include/SkTorrent \
                $$SK/include/SkBackend \
                $$SK/include \
