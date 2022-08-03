@@ -340,7 +340,7 @@ $SkyBase/WindowSky.qml \
 $SkyBase/RectangleBorders.qml \
 $SkyBase/TextBase.qml \
 $SkyBase/TextSubtitle.qml \
-$SkyTouch/StyleTouch.qml \
+$SkyTouch/StyleTouch.qml"
 
 #--------------------------------------------------------------------------------------------------
 
