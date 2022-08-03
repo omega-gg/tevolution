@@ -1,0 +1,335 @@
+//=================================================================================================
+/*
+    Copyright (C) 2020 tevolution authors. <http://omega.gg/tevolution>
+
+    Author: Benjamin Arnaud. <http://bunjee.me> <bunjee@omega.gg>
+
+    This file is part of tevolution.
+
+    - Private License Usage:
+    tevolution licensees holding valid private licenses may use this file in accordance with the
+    private license agreement provided with the Software or, alternatively, in accordance with the
+    terms contained in written agreement between you and tevolution authors. For further
+    information contact us at contact@omega.gg.
+*/
+//=================================================================================================
+
+#include "ControllerCore.h"
+
+// Qt includes
+#include <QDir>
+
+// Sk includes
+#include <WControllerApplication>
+#include <WControllerFile>
+#include <WControllerView>
+#include <WControllerDeclarative>
+#include <WControllerPlaylist>
+#include <WControllerMedia>
+#ifndef SK_NO_TORRENT
+#include <WControllerTorrent>
+#endif
+#include <WViewResizer>
+#include <WViewDrag>
+#include <WWindow>
+#include <WCache>
+#include <WLoaderTorrent>
+#include <WLoaderVbml>
+#include <WHookTorrent>
+#include <WImageFilterColor>
+#include <WImageFilterMask>
+#include <WDeclarativeApplication>
+#include <WDeclarativeBorders>
+#include <WDeclarativeImage>
+#include <WDeclarativeImageSvg>
+#include <WDeclarativePlayer>
+
+// Application includes
+#include <DataOnline>
+
+W_INIT_CONTROLLER(ControllerCore)
+
+//-------------------------------------------------------------------------------------------------
+// Static variables
+
+static const QString CORE_VERSION = "1.0.0-0";
+
+#ifndef SK_DEPLOY
+#ifdef Q_OS_MAC
+static const QString PATH_STORAGE = "/../../../storage";
+static const QString PATH_BACKEND = "../../../../../backend";
+#else
+static const QString PATH_STORAGE = "/storage";
+static const QString PATH_BACKEND = "../../backend";
+#endif
+#endif
+
+//-------------------------------------------------------------------------------------------------
+// Ctor / dtor
+//-------------------------------------------------------------------------------------------------
+
+ControllerCore::ControllerCore() : WController()
+{
+    _online = NULL;
+
+    _cache = NULL;
+
+    //---------------------------------------------------------------------------------------------
+    // Settings
+
+    sk->setName("tevolution");
+
+    sk->setVersion(CORE_VERSION);
+
+#ifdef Q_OS_LINUX
+    sk->setIcon(":/icons/icon.svg");
+#endif
+
+#ifdef SK_DEPLOY
+    _path = QDir::fromNativeSeparators(WControllerFile::pathWritable());
+#else
+    _path = QDir::currentPath() + PATH_STORAGE;
+#endif
+
+    wControllerFile->setPathStorage(_path);
+
+    wControllerView->setLoadMode(WControllerView::LoadVisible);
+
+#ifdef SK_DESKTOP
+    sk->setDefaultMargins(5);
+#endif
+
+    //---------------------------------------------------------------------------------------------
+    // DataLocal
+
+    _local.setSaveEnabled(true);
+
+    _local.load(true);
+
+    //---------------------------------------------------------------------------------------------
+    // QML
+    //---------------------------------------------------------------------------------------------
+    // Global
+
+    qmlRegisterUncreatableType<WControllerDeclarative>("Sky", 1,0, "Sk", "Sk is not creatable");
+
+    //---------------------------------------------------------------------------------------------
+    // Application
+
+    qmlRegisterType<WDeclarativeApplication>("Sky", 1,0, "Application");
+
+    //---------------------------------------------------------------------------------------------
+    // View
+
+    qmlRegisterUncreatableType<WView>("Sky", 1,0, "View", "View is abstract");
+
+    qmlRegisterType<WViewResizer>("Sky", 1,0, "ViewResizer");
+    qmlRegisterType<WViewDrag>   ("Sky", 1,0, "ViewDrag");
+
+    qmlRegisterType<WWindow>("Sky", 1,0, "BaseWindow");
+
+    //---------------------------------------------------------------------------------------------
+    // Image
+
+    qmlRegisterUncreatableType<WImageFilter>("Sky", 1,0, "ImageFilter", "ImageFilter is abstract");
+
+    qmlRegisterType<WImageFilterColor>("Sky", 1,0, "ImageFilterColor");
+    qmlRegisterType<WImageFilterMask> ("Sky", 1,0, "ImageFilterMask");
+
+    //---------------------------------------------------------------------------------------------
+    // Declarative
+
+    qmlRegisterType<WDeclarativeBorders>("Sky", 1,0, "Borders");
+
+    qmlRegisterType<WDeclarativeMouseArea>("Sky", 1,0, "MouseArea");
+
+    qmlRegisterType<WDeclarativeGradient>    ("Sky", 1,0, "ScaleGradient");
+    qmlRegisterType<WDeclarativeGradientStop>("Sky", 1,0, "ScaleGradientStop");
+
+    qmlRegisterType<WDeclarativeImage>     ("Sky", 1,0, "Image");
+    qmlRegisterType<WDeclarativeImageScale>("Sky", 1,0, "ImageScale");
+    qmlRegisterType<WDeclarativeImageSvg>  ("Sky", 1,0, "ImageSvg");
+
+#ifdef QT_4
+    qmlRegisterType<WDeclarativeImageSvgScale>("Sky", 1,0, "ImageSvgScale");
+#endif
+
+    qmlRegisterType<WDeclarativePlayer>("Sky", 1,0, "Player");
+
+    //---------------------------------------------------------------------------------------------
+    // Multimedia
+
+#ifdef QT_4
+    qmlRegisterUncreatableType<WBackendNet>("Sky", 1,0, "BackendNet", "BackendNet is abstract");
+#endif
+
+    qmlRegisterUncreatableType<WAbstractBackend>("Sky", 1,0, "AbstractBackend",
+                                                 "AbstractBackend is abstract");
+
+    qmlRegisterUncreatableType<WAbstractHook>("Sky", 1,0, "AbstractHook",
+                                              "AbstractHook is abstract");
+
+    //---------------------------------------------------------------------------------------------
+    // Context
+
+    wControllerDeclarative->setContextProperty("sk", sk);
+
+    wControllerDeclarative->setContextProperty("core",  this);
+    wControllerDeclarative->setContextProperty("local", &(_local));
+}
+
+//-------------------------------------------------------------------------------------------------
+// Interface
+//-------------------------------------------------------------------------------------------------
+
+#ifdef SK_DESKTOP
+
+/* Q_INVOKABLE */ void ControllerCore::applyArguments(int & argc, char ** argv)
+{
+    if (argc < 2) return;
+
+    _argument = QString(argv[1]);
+}
+
+#endif
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE */ void ControllerCore::load()
+{
+    if (_cache) return;
+
+    //---------------------------------------------------------------------------------------------
+    // DataLocal
+
+    // NOTE: We make sure the storage folder is created.
+    _local.createPath();
+
+    //---------------------------------------------------------------------------------------------
+    // Message handler
+
+    // FIXME Qt4.8.7: qInstallMsgHandler breaks QML 'Keys' events.
+#ifndef QT_4
+    wControllerFile->initMessageHandler();
+#endif
+
+    //---------------------------------------------------------------------------------------------
+    // Paths
+
+    qDebug("tevolution %s", sk->version().C_STR);
+
+    qDebug("Path storage: %s", _path.C_STR);
+    qDebug("Path log:     %s", wControllerFile->pathLog().C_STR);
+    qDebug("Path config:  %s", _local.getFilePath().C_STR);
+
+    //---------------------------------------------------------------------------------------------
+    // Controllers
+
+    W_CREATE_CONTROLLER(WControllerPlaylist);
+    W_CREATE_CONTROLLER(WControllerMedia);
+
+#ifndef SK_NO_TORRENT
+    W_CREATE_CONTROLLER_2(WControllerTorrent, _path + "/torrents", _local._torrentPort);
+#endif
+
+    //---------------------------------------------------------------------------------------------
+    // Cache
+
+    _cache = new WCache(_path + "/cache", 1048576 * 100); // 100 megabytes
+
+    wControllerFile->setCache(_cache);
+
+#ifndef SK_NO_TORRENT
+    //---------------------------------------------------------------------------------------------
+    // LoaderTorrent
+
+    WLoaderTorrent * loaderTorrent = new WLoaderTorrent(this);
+
+    wControllerPlaylist->registerLoader(WBackendNetQuery::TypeTorrent, loaderTorrent);
+    wControllerTorrent ->registerLoader(WBackendNetQuery::TypeTorrent, loaderTorrent);
+#endif
+
+    //---------------------------------------------------------------------------------------------
+    // LoaderVbml
+
+    WLoaderVbml * loaderVbml = new WLoaderVbml(this);
+
+    wControllerPlaylist->registerLoader(WBackendNetQuery::TypeVbml, loaderVbml);
+
+    //---------------------------------------------------------------------------------------------
+    // Torrents
+
+    applyTorrentOptions(_local._torrentConnections,
+                        _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
+
+    //---------------------------------------------------------------------------------------------
+    // DataOnline
+
+    _online = new DataOnline(this);
+
+    //---------------------------------------------------------------------------------------------
+    // QML
+
+    qmlRegisterType<DataOnline>("Sky", 1,0, "DataOnline");
+
+    wControllerDeclarative->setContextProperty("online", _online);
+
+    //---------------------------------------------------------------------------------------------
+
+    _local.save();
+}
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE */ bool ControllerCore::updateVersion()
+{
+    if (_online->_version.isEmpty() || _online->_version == CORE_VERSION) return false;
+
+    if (Sk::runUpdate())
+    {
+        _online->_version = QString();
+
+        return true;
+    }
+    else return false;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE */ void ControllerCore::clearCache()
+{
+    _cache->clearFiles();
+
+#ifndef SK_NO_TORRENT
+    wControllerTorrent->clearTorrents();
+#endif
+}
+
+//-------------------------------------------------------------------------------------------------
+// Static functions
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE static */ void ControllerCore::applyTorrentOptions(int connections,
+                                                                  int upload, int download,
+                                                                  int cache)
+{
+#ifdef SK_NO_TORRENT
+    Q_UNUSED(connections); Q_UNUSED(upload); Q_UNUSED(download); Q_UNUSED(cache);
+#else
+    wControllerTorrent->setOptions(connections, upload * 1024, download * 1024);
+
+    wControllerTorrent->setSizeMax(qint64(cache) * 1048576);
+#endif
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE static */ WAbstractHook * ControllerCore::createHook(WAbstractBackend * backend)
+{
+#ifdef SK_NO_TORRENT
+    Q_UNUSED(backend);
+
+    return NULL;
+#else
+    return new WHookTorrent(backend);
+#endif
+}
