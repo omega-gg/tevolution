@@ -201,6 +201,10 @@ OTHER_FILES += 3rdparty.sh \
                README.md \
                AUTHORS.md \
                .azure-pipelines.yml \
+               content/generate.sh \
+               content/Main.qml \
+               content/StyleApplication.qml \
+               content/Gui.qml \
                include/generate.sh \
                dist/tevolution.rc \
                dist/script/start.sh \
