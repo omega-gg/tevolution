@@ -210,6 +210,13 @@ if [ $os = "mobile" -o "$2" = "all" -o "$2" = "deploy" ]; then
 
         cp "$backend"/*.vbml $backendiOS
 
+        #------------------------------------------------------------------------------------------
+        # NOTE iOS: Torrents are not available.
+
+        rm $backendiOS/bittorrent.vbml
+
+        apply '/bittorrent/d' $backendiOS/index.vbml
+
     elif [ $1 = "android" ]; then
 
         echo "COPYING android"
