@@ -37,3 +37,5 @@ SOURCES += $$SK_CORE/controllers/WController.cpp \
            src/controllers/ControllerCore.cpp \
 
 ios:OBJECTIVE_SOURCES += $$SK_CORE/controllers/WControllerApplication.mm \
+
+OTHER_FILES += $$SK_CORE/controllers/*.mm
