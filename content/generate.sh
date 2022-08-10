@@ -215,6 +215,8 @@ if [ $os = "mobile" -o "$2" = "all" -o "$2" = "deploy" ]; then
 
         rm $backendiOS/bittorrent.vbml
 
+        rm $backendiOS/cover/bittorrent.png
+
         apply '/bittorrent/d' $backendiOS/index.vbml
 
     elif [ $1 = "android" ]; then
