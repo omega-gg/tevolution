@@ -109,6 +109,10 @@ Application
 
         onIdleChanged: gui.onIdleChanged()
 
+//#MOBILE
+        onDoubleClicked: gui.toggleFullScreen()
+//#END
+
         Loader
         {
             id: loader
