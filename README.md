@@ -3,7 +3,7 @@
 [![azure](https://dev.azure.com/bunjee/tevolution/_apis/build/status/omega-gg.tevolution)](https://dev.azure.com/bunjee/tevolution/_build)
 
 [tevolution](https://omega.gg/tevolution) is a Remote Video Screen.<br>
-Designed to take streaming requests from a [Semantic Player](http://omega.gg/about/SemanticPlayer).<br>
+Designed to take streaming requests from a [Semantic Player](https://omega.gg/about/SemanticPlayer).<br>
 [omega](https://omega.gg/about) is building tevolution to empower people.<br>
 
 ## Technology

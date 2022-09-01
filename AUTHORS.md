@@ -1,6 +1,6 @@
-# [tevolution](http://omega.gg/tevolution)
+# [tevolution](https://omega.gg/tevolution)
 ---
 
 ## Authors
 
-- Benjamin Arnaud aka [bunjee](http://bunjee.me) | <bunjee@omega.gg>
+- Benjamin Arnaud aka [bunjee](https://bunjee.me) | <bunjee@omega.gg>
