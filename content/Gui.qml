@@ -60,16 +60,17 @@ Item
 
     function onKeyPressed(event)
     {
-//#DEPLOY
-        if (event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
-//#ELSE
-        // NOTE dev: It's useful to close the application quickly.
         if (event.key == Qt.Key_Escape)
-//#END
         {
             event.accepted = true;
 
             window.close();
+        }
+        else if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
+        {
+            event.accepted = true;
+
+            toggleFullScreen()
         }
     }
 
@@ -80,7 +81,6 @@ Item
     function keyPressed(event) {}
 
     function keyReleased(event) {}
-
 
     //---------------------------------------------------------------------------------------------
     // Children
@@ -101,4 +101,22 @@ Item
         onDoubleClicked: toggleFullScreen()
     }
 //#END
+
+    Rectangle
+    {
+        anchors.fill: parent
+
+        color: "#969696"
+
+        Noise
+        {
+            anchors.fill: parent
+
+            interval: st.duration(16)
+
+            fillMode: Noise.PreserveAspectCrop
+
+            color: "#b4b4b4"
+        }
+    }
 }

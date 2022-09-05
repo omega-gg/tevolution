@@ -43,6 +43,7 @@
 #include <WDeclarativeImage>
 #include <WDeclarativeImageSvg>
 #include <WDeclarativePlayer>
+#include <WDeclarativeNoise>
 
 // Application includes
 #include <DataOnline>
@@ -155,6 +156,8 @@ ControllerCore::ControllerCore() : WController()
 #endif
 
     qmlRegisterType<WDeclarativePlayer>("Sky", 1,0, "Player");
+
+    qmlRegisterType<WDeclarativeNoise>("Sky", 1,0, "Noise");
 
     //---------------------------------------------------------------------------------------------
     // Multimedia

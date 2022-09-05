@@ -16,6 +16,8 @@ HEADERS += $$SK_GUI/declarative/WDeclarativeApplication.h \
            $$SK_GUI/declarative/WDeclarativeImageSvg_p.h \
            $$SK_GUI/declarative/WDeclarativePlayer.h \
            $$SK_GUI/declarative/WDeclarativePlayer_p.h \
+           $$SK_GUI/declarative/WDeclarativeNoise.h \
+           $$SK_GUI/declarative/WDeclarativeNoise_p.h \
 
 contains(QT_MAJOR_VERSION, 4) {
     HEADERS += $$SK_GUI/declarative/Qt/qdeclarativemousearea_p.h \
@@ -36,6 +38,7 @@ SOURCES += $$SK_GUI/declarative/WDeclarativeApplication.cpp \
            $$SK_GUI/declarative/WDeclarativeImage.cpp \
            $$SK_GUI/declarative/WDeclarativeImageSvg.cpp \
            $$SK_GUI/declarative/WDeclarativePlayer.cpp \
+           $$SK_GUI/declarative/WDeclarativeNoise.cpp \
 
 contains(QT_MAJOR_VERSION, 4) {
     SOURCES += $$SK_GUI/declarative/Qt/qdeclarativemousearea.cpp
