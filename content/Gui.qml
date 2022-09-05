@@ -81,16 +81,7 @@ Item
 
     function toggleFullScreen()
     {
-        if (window.fullScreen)
-        {
-            window.fullScreen = false;
-//#!MAC+!MOBILE
-            // FIXME macOS: We can't go from full screen to normal window right away.
-            //              This could be related to the animation.
-            window.maximized = false;
-//#END
-        }
-        else
+        if (window.fullScreen == false)
         {
             window.fullScreen = true;
 
@@ -98,6 +89,7 @@ Item
 
             window.idle = true;
         }
+        else pRestoreFullScreen();
     }
 
     //---------------------------------------------------------------------------------------------
@@ -107,9 +99,19 @@ Item
 
     function onBeforeClose() {}
 
-    function onActiveChanged() {}
+    function onActiveChanged()
+    {
+        sk.screenDimEnabled = window.isActive;
+    }
 
-    function onIdleChanged() {}
+    function onIdleChanged()
+    {
+        if (window.idle && player.isPlaying)
+        {
+             sk.cursorVisible = false;
+        }
+        else sk.cursorVisible = true;
+    }
 
     //---------------------------------------------------------------------------------------------
     // Keys
@@ -117,6 +119,12 @@ Item
     function onKeyPressed(event)
     {
         if (event.key == Qt.Key_Escape)
+        {
+            event.accepted = true;
+
+            pClose();
+        }
+        else if (event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
         {
             event.accepted = true;
 
@@ -137,6 +145,28 @@ Item
     function keyPressed(event) {}
 
     function keyReleased(event) {}
+
+    //---------------------------------------------------------------------------------------------
+    // Private
+
+    function pClose()
+    {
+        if (window.fullScreen)
+        {
+            pRestoreFullScreen();
+        }
+        else window.close();
+    }
+
+    function pRestoreFullScreen()
+    {
+        window.fullScreen = false;
+//#!MAC+!MOBILE
+        // FIXME macOS: We can't go from full screen to normal window right away.
+        //              This could be related to the animation.
+        window.maximized = false;
+//#END
+    }
 
     //---------------------------------------------------------------------------------------------
     // Children
