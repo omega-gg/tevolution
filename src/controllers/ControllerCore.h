@@ -48,6 +48,8 @@ public: // Interface
 
     Q_INVOKABLE bool updateVersion();
 
+    Q_INVOKABLE void generateTag(const QString & text);
+
     Q_INVOKABLE void clearCache();
 
 public: // Static functions
@@ -55,6 +57,9 @@ public: // Static functions
                                                 int upload, int download, int cache);
 
     Q_INVOKABLE static WAbstractHook * createHook(WAbstractBackend * backend);
+
+signals:
+    void tagUpdated(const QImage & image);
 
 private: // Variables
 #ifdef SK_DESKTOP

@@ -44,6 +44,7 @@
 #include <WDeclarativeImageSvg>
 #include <WDeclarativePlayer>
 #include <WDeclarativeNoise>
+#include <WBarcodeWriter>
 
 // Application includes
 #include <DataOnline>
@@ -294,6 +295,13 @@ ControllerCore::ControllerCore() : WController()
         return true;
     }
     else return false;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE */ void ControllerCore::generateTag(const QString & text)
+{
+    WBarcodeWriter::startWrite(text, this, SIGNAL(tagUpdated(const QImage &)));
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -20,6 +20,62 @@ import Sky     1.0
 Item
 {
     //---------------------------------------------------------------------------------------------
+    // Properties
+    //---------------------------------------------------------------------------------------------
+    // Private
+
+    property int pSize: (st.isTight) ? height / 3
+                                     : height / 2
+
+    // NOTE: Margins are 56 pixels on a 512 tag.
+    property int pSizeTag: pSize * 0.890625
+
+    //---------------------------------------------------------------------------------------------
+    // Settings
+    //---------------------------------------------------------------------------------------------
+
+    opacity: 0
+
+    //---------------------------------------------------------------------------------------------
+    // Animations
+    //---------------------------------------------------------------------------------------------
+
+    Behavior on opacity
+    {
+        PropertyAnimation
+        {
+            duration: st.duration_normal
+
+            easing.type: st.easing
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------
+    // Events
+    //---------------------------------------------------------------------------------------------
+
+    Component.onCompleted:
+    {
+        opacity = 1.0;
+
+        core.generateTag("https://vbml.omega.gg/");
+    }
+
+    //---------------------------------------------------------------------------------------------
+    // Connections
+    //---------------------------------------------------------------------------------------------
+
+    Connections
+    {
+        target: core
+
+        /* QML_CONNECTION */ function onTagUpdated(image)
+        {
+            imageTag.applyImage(image);
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------
     // Functions
     //---------------------------------------------------------------------------------------------
 
@@ -102,21 +158,38 @@ Item
     }
 //#END
 
-    Rectangle
+    Noise
     {
         anchors.fill: parent
 
-        color: "#969696"
+        interval: st.noise_interval
 
-        Noise
-        {
-            anchors.fill: parent
+        fillMode: Noise.PreserveAspectCrop
 
-            interval: st.duration(16)
+        color: st.noise_color
+    }
 
-            fillMode: Noise.PreserveAspectCrop
+    ImageScale
+    {
+        anchors.centerIn: parent
 
-            color: "#b4b4b4"
-        }
+        width : pSize
+        height: width
+
+        source: st.picture_tag
+
+        asynchronous: true
+    }
+
+    Image
+    {
+        id: imageTag
+
+        anchors.centerIn: parent
+
+        width : pSizeTag
+        height: pSizeTag
+
+        smooth: false
     }
 }
