@@ -58,7 +58,7 @@ Item
     {
         opacity = 1.0;
 
-        core.generateTag(core.getSource());
+        core.generateSource();
     }
 
     //---------------------------------------------------------------------------------------------

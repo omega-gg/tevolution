@@ -300,6 +300,12 @@ ControllerCore::ControllerCore() : WController()
 
 //-------------------------------------------------------------------------------------------------
 
+/* Q_INVOKABLE */ void ControllerCore::generateSource()
+{
+    WBroadcastServer::startSource("https://vbml.omega.gg/connect",
+                                  this, SLOT(onSource(const QString &)));
+}
+
 /* Q_INVOKABLE */ void ControllerCore::generateTag(const QString & text)
 {
     WBarcodeWriter::startWrite(text, this, SIGNAL(tagUpdated(const QImage &)));
@@ -347,12 +353,12 @@ ControllerCore::ControllerCore() : WController()
 }
 
 //-------------------------------------------------------------------------------------------------
+// Private slots
+//-------------------------------------------------------------------------------------------------
 
-/* Q_INVOKABLE static */ QString ControllerCore::getSource()
+void ControllerCore::onSource(const QString & source)
 {
-    QString source = WBroadcastServer::source("https://vbml.omega.gg/connect");
-
     qDebug("Server source: %s", source.C_STR);
 
-    return source;
+    generateTag(source);
 }

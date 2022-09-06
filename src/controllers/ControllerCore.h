@@ -48,6 +48,8 @@ public: // Interface
 
     Q_INVOKABLE bool updateVersion();
 
+    Q_INVOKABLE void generateSource();
+
     Q_INVOKABLE void generateTag(const QString & text);
 
     Q_INVOKABLE void clearCache();
@@ -58,7 +60,8 @@ public: // Static functions
 
     Q_INVOKABLE static WAbstractHook * createHook(WAbstractBackend * backend);
 
-    Q_INVOKABLE static QString getSource();
+private slots:
+    void onSource(const QString & source);
 
 signals:
     void tagUpdated(const QImage & image);
