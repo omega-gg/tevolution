@@ -29,6 +29,7 @@
 #ifndef SK_NO_TORRENT
 #include <WControllerTorrent>
 #endif
+#include <WBroadcastServer>
 #include <WViewResizer>
 #include <WViewDrag>
 #include <WWindow>
@@ -343,4 +344,15 @@ ControllerCore::ControllerCore() : WController()
 #else
     return new WHookTorrent(backend);
 #endif
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE static */ QString ControllerCore::getSource()
+{
+    QString source = WBroadcastServer::source("https://vbml.omega.gg/connect");
+
+    qDebug("Server source: %s", source.C_STR);
+
+    return source;
 }

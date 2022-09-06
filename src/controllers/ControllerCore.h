@@ -58,6 +58,8 @@ public: // Static functions
 
     Q_INVOKABLE static WAbstractHook * createHook(WAbstractBackend * backend);
 
+    Q_INVOKABLE static QString getSource();
+
 signals:
     void tagUpdated(const QImage & image);
 

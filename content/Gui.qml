@@ -58,7 +58,7 @@ Item
     {
         opacity = 1.0;
 
-        core.generateTag("https://vbml.omega.gg/");
+        core.generateTag(core.getSource());
     }
 
     //---------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ Item
         {
             window.fullScreen = true;
 
-            //if (player.isPlaying == false) return;
+            if (player.isPlaying == false) return;
 
             window.idle = true;
         }
@@ -101,6 +101,7 @@ Item
 
     function onActiveChanged()
     {
+        // NOTE: We want to avoid screen dimming at all time.
         sk.screenDimEnabled = window.isActive;
     }
 
@@ -187,6 +188,8 @@ Item
         onDoubleClicked: toggleFullScreen()
     }
 //#END
+
+    Player { id: player }
 
     Noise
     {
