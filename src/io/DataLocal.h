@@ -52,6 +52,8 @@ signals:
 
     void torrentCacheChanged();
 
+    void broadcastPortChanged();
+
 public: // Properties
     bool vsync() const;
     void setVsync(bool enabled);
@@ -71,6 +73,9 @@ public: // Properties
     int  torrentCache() const;
     void setTorrentCache(int cache);
 
+    int  broadcastPort() const;
+    void setBroadcastPort(int port);
+
 private: // Variables
     QString _version;
 
@@ -80,10 +85,12 @@ private: // Variables
 
     int _torrentConnections;
 
-    int  _torrentUpload;
-    int  _torrentDownload;
+    int _torrentUpload;
+    int _torrentDownload;
 
     int _torrentCache;
+
+    int _broadcastPort;
 
 private:
     Q_DISABLE_COPY(DataLocal)

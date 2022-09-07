@@ -268,6 +268,11 @@ ControllerCore::ControllerCore() : WController()
                         _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
 
     //---------------------------------------------------------------------------------------------
+    // BroadcastServer
+
+    WBroadcastServer * server = new WBroadcastServer(_local._broadcastPort, this);
+
+    //---------------------------------------------------------------------------------------------
     // DataOnline
 
     _online = new DataOnline(this);
@@ -302,7 +307,7 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::generateSource()
 {
-    WBroadcastServer::startSource("https://vbml.omega.gg/connect",
+    WBroadcastServer::startSource(_local._broadcastPort, "https://vbml.omega.gg/connect",
                                   this, SLOT(onSource(const QString &)));
 }
 

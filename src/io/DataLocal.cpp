@@ -36,6 +36,9 @@ void DataLocal_patch(QString & data, const QString & api);
 // NOTE: Defaut streaming port for tevolution.
 static const int DATALOCAL_PORT = 8300;
 
+// NOTE: Defaut broadcasting port.
+static const int DATALOCAL_BROADCAST_PORT = 9100;
+
 //=================================================================================================
 // DataLocalWrite
 //=================================================================================================
@@ -74,6 +77,8 @@ public: // Variables
     int torrentDownload;
 
     int torrentCache;
+
+    int broadcastPort;
 };
 
 //=================================================================================================
@@ -117,6 +122,8 @@ public: // Variables
 
     stream.writeTextElement("torrentCache", QString::number(torrentCache));
 
+    stream.writeTextElement("broadcastPort", QString::number(broadcastPort));
+
     stream.writeEndElement(); // name
 
     stream.writeEndDocument();
@@ -148,6 +155,8 @@ public: // Variables
     _torrentDownload = 0;
 
     _torrentCache = 2000;
+
+    _broadcastPort = DATALOCAL_BROADCAST_PORT;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -200,6 +209,8 @@ public: // Variables
     action->torrentDownload = _torrentDownload;
 
     action->torrentCache = _torrentCache;
+
+    action->broadcastPort = _broadcastPort;
 
     return action;
 }
@@ -269,6 +280,13 @@ bool DataLocal::extract(const QByteArray & array)
     if (WControllerXml::readNextStartElement(&stream, "torrentCache") == false) return false;
 
     _torrentCache = WControllerXml::readNextInt(&stream);
+
+    //---------------------------------------------------------------------------------------------
+    // broadcastPort
+
+    if (WControllerXml::readNextStartElement(&stream, "broadcastPort") == false) return false;
+
+    _broadcastPort = WControllerXml::readNextInt(&stream);
 
     qDebug("DATA LOCAL LOADED");
 
@@ -381,6 +399,24 @@ void DataLocal::setTorrentCache(int cache)
     _torrentCache = cache;
 
     emit torrentCacheChanged();
+
+    save();
+}
+
+int DataLocal::broadcastPort() const
+{
+    return _broadcastPort;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void DataLocal::setBroadcastPort(int port)
+{
+    if (_broadcastPort == port) return;
+
+    _broadcastPort = port;
+
+    emit broadcastPortChanged();
 
     save();
 }
