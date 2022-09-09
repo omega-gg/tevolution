@@ -225,4 +225,21 @@ Item
 
         smooth: false
     }
+
+//#DESKTOP
+    ButtonsWindow
+    {
+        anchors.top  : parent.top
+        anchors.right: parent.right
+
+        visible: (window.isEntered && window.idle == false)
+
+        buttonMinimize.margins: st.dp10
+        buttonMaximize.margins: st.dp10
+        buttonClose   .margins: st.dp6
+
+        buttonMinimize.visible: (st.isTight == false)
+        buttonMaximize.visible: buttonMinimize.visible
+    }
+//#END
 }

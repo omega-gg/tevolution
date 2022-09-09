@@ -349,7 +349,12 @@ $SkyBase/WindowSky.qml \
 $SkyBase/RectangleBorders.qml \
 $SkyBase/TextBase.qml \
 $SkyBase/TextSubtitle.qml \
-$SkyTouch/StyleTouch.qml"
+$SkyBase/BaseButton.qml \
+$SkyTouch/StyleTouch.qml \
+$SkyTouch/BaseButtonTouch.qml \
+$SkyTouch/ButtonTouch.qml \
+$SkyTouch/ButtonTouchIcon.qml \
+$SkyTouch/ButtonsWindow.qml"
 
 #--------------------------------------------------------------------------------------------------
 
