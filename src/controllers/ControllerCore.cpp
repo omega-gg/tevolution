@@ -346,15 +346,23 @@ ControllerCore::ControllerCore() : WController()
 
 //-------------------------------------------------------------------------------------------------
 
-/* Q_INVOKABLE static */ WAbstractHook * ControllerCore::createHook(WAbstractBackend * backend)
+/* Q_INVOKABLE static */ void ControllerCore::applyHooks(WDeclarativePlayer * player)
 {
 #ifdef SK_NO_TORRENT
-    Q_UNUSED(backend);
-
-    return NULL;
-#else
-    return new WHookTorrent(backend);
+    return;
 #endif
+
+    Q_ASSERT(player);
+
+    WAbstractBackend * backend = player->backend();
+
+    Q_ASSERT(backend);
+
+    QList<WAbstractHook *> list;
+
+    list.append(new WHookTorrent(backend));
+
+    player->setHooks(list);
 }
 
 //-------------------------------------------------------------------------------------------------

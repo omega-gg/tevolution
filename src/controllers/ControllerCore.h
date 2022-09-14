@@ -31,6 +31,7 @@ class DataOnline;
 class WAbstractBackend;
 class WAbstractHook;
 class WCache;
+class WDeclarativePlayer;
 
 class ControllerCore : public WController
 {
@@ -58,7 +59,7 @@ public: // Static functions
     Q_INVOKABLE static void applyTorrentOptions(int connections,
                                                 int upload, int download, int cache);
 
-    Q_INVOKABLE static WAbstractHook * createHook(WAbstractBackend * backend);
+    Q_INVOKABLE static void applyHooks(WDeclarativePlayer * player);
 
 private slots:
     void onSource(const QString & source);
