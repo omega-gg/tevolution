@@ -24,14 +24,15 @@ StyleTouch
     //---------------------------------------------------------------------------------------------
     // Noise
 
-    property int noise_interval: duration(16)
+    property int noise_interval: ms(16)
 
     property color noise_color: "#b4b4b4"
 
     //---------------------------------------------------------------------------------------------
     // Pictures
 
-    property url picture_tag: "pictures/tag.svg"
+    property url picture_tag : "pictures/tag.svg"
+    property url picture_flag: "pictures/flag.svg"
 
     //---------------------------------------------------------------------------------------------
     // Settings

@@ -350,6 +350,8 @@ $SkyBase/RectangleBorders.qml \
 $SkyBase/TextBase.qml \
 $SkyBase/TextSubtitle.qml \
 $SkyBase/BaseButton.qml \
+$SkyBase/AnimatedSlide.qml \
+$SkyBase/AnimatedSlideImage.qml \
 $SkyTouch/StyleTouch.qml \
 $SkyTouch/BaseButtonTouch.qml \
 $SkyTouch/ButtonTouch.qml \

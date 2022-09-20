@@ -31,11 +31,14 @@ class DataOnline;
 class WAbstractBackend;
 class WAbstractHook;
 class WCache;
+class WBroadcastServer;
 class WDeclarativePlayer;
 
 class ControllerCore : public WController
 {
     Q_OBJECT
+
+    Q_PROPERTY(WBroadcastServer * server READ server NOTIFY serverChanged)
 
 private:
     ControllerCore();
@@ -67,6 +70,11 @@ private slots:
 signals:
     void tagUpdated(const QImage & image);
 
+    void serverChanged();
+
+public: // Properties
+    WBroadcastServer * server();
+
 private: // Variables
 #ifdef SK_DESKTOP
     QString _argument;
@@ -76,6 +84,8 @@ private: // Variables
     DataOnline * _online;
 
     WCache * _cache;
+
+    WBroadcastServer * _server;
 
     QString _path;
 

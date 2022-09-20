@@ -22,13 +22,21 @@ Item
     //---------------------------------------------------------------------------------------------
     // Properties
     //---------------------------------------------------------------------------------------------
+
+    /* read */ property variant server: core.server
+
+    //---------------------------------------------------------------------------------------------
     // Private
+
+    property bool pConnected: server.isConnected
 
     property int pSize: (st.isTight) ? height / 3
                                      : height / 2
 
     // NOTE: Margins are 56 pixels on a 512 tag.
     property int pSizeTag: pSize * 0.890625
+
+    property int pDuration: st.ms1000
 
     //---------------------------------------------------------------------------------------------
     // Settings
@@ -193,7 +201,11 @@ Item
 
     Noise
     {
+        id: noise
+
         anchors.fill: parent
+
+        visible: (flag.opacity != 1.0)
 
         interval: st.noise_interval
 
@@ -209,21 +221,49 @@ Item
         width : pSize
         height: width
 
+        visible: noise.visible
+        opacity: noise.opacity
+
         source: st.picture_tag
 
         asynchronous: true
+
+        Image
+        {
+            id: imageTag
+
+            anchors.centerIn: parent
+
+            width : pSizeTag
+            height: pSizeTag
+
+            smooth: false
+        }
     }
 
-    Image
+    AnimatedSlideImage
     {
-        id: imageTag
+        id: flag
 
-        anchors.centerIn: parent
+        anchors.fill: parent
 
-        width : pSizeTag
-        height: pSizeTag
+        visible: (opacity != 0.0)
+
+        opacity: (pConnected) ? 1.0 : 0.0
+
+        source: st.picture_flag
 
         smooth: false
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
     }
 
 //#DESKTOP

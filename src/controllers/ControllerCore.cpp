@@ -77,6 +77,8 @@ ControllerCore::ControllerCore() : WController()
 
     _cache = NULL;
 
+    _server = NULL;
+
     //---------------------------------------------------------------------------------------------
     // Settings
 
@@ -120,6 +122,12 @@ ControllerCore::ControllerCore() : WController()
     // Application
 
     qmlRegisterType<WDeclarativeApplication>("Sky", 1,0, "Application");
+
+    //---------------------------------------------------------------------------------------------
+    // Network
+
+    qmlRegisterUncreatableType<WBroadcastServer>("Sky", 1,0, "BroadcastServer",
+                                                 "ImageFilter not creatable");
 
     //---------------------------------------------------------------------------------------------
     // View
@@ -270,7 +278,9 @@ ControllerCore::ControllerCore() : WController()
     //---------------------------------------------------------------------------------------------
     // BroadcastServer
 
-    WBroadcastServer * server = new WBroadcastServer(_local._broadcastPort, this);
+    _server = new WBroadcastServer(_local._broadcastPort, this);
+
+    emit serverChanged();
 
     //---------------------------------------------------------------------------------------------
     // DataOnline
@@ -374,4 +384,13 @@ void ControllerCore::onSource(const QString & source)
     qDebug("Server source: %s", source.C_STR);
 
     generateTag(source);
+}
+
+//-------------------------------------------------------------------------------------------------
+// Properties
+//-------------------------------------------------------------------------------------------------
+
+WBroadcastServer * ControllerCore::server()
+{
+    return _server;
 }
