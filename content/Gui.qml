@@ -100,6 +100,15 @@ Item
         else pRestoreFullScreen();
     }
 
+    function getColor()
+    {
+        if (/*cover.visible || */player.visible)
+        {
+             return "black";
+        }
+        else return st.window_color;
+    }
+
     //---------------------------------------------------------------------------------------------
     // Events
 
@@ -197,7 +206,12 @@ Item
     }
 //#END
 
-    Player { id: player }
+    Player
+    {
+        id: player
+
+        visible: false
+    }
 
     Noise
     {

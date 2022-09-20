@@ -53,7 +53,8 @@ Application
 
         st: StyleApplication { id: st }
 
-        color: st.window_color
+        color: (gui) ? gui.getColor()
+                     : st.window_color
 
 //#MOBILE
         Component.onCompleted:
