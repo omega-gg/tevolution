@@ -19,6 +19,8 @@ import Sky     1.0
 
 Item
 {
+    id: gui
+
     //---------------------------------------------------------------------------------------------
     // Properties
     //---------------------------------------------------------------------------------------------
@@ -211,6 +213,8 @@ Item
         id: player
 
         visible: false
+
+        server: gui.server
     }
 
     Noise
@@ -226,33 +230,6 @@ Item
         fillMode: Noise.PreserveAspectCrop
 
         color: st.noise_color
-    }
-
-    ImageScale
-    {
-        anchors.centerIn: parent
-
-        width : pSize
-        height: width
-
-        visible: noise.visible
-        opacity: noise.opacity
-
-        source: st.picture_tag
-
-        asynchronous: true
-
-        Image
-        {
-            id: imageTag
-
-            anchors.centerIn: parent
-
-            width : pSizeTag
-            height: pSizeTag
-
-            smooth: false
-        }
     }
 
     AnimatedSlideImage
@@ -277,6 +254,33 @@ Item
 
                 easing.type: st.easing
             }
+        }
+    }
+
+    ImageScale
+    {
+        anchors.centerIn: parent
+
+        width : pSize
+        height: width
+
+        //visible: noise.visible
+        //opacity: noise.opacity
+
+        source: st.picture_tag
+
+        asynchronous: true
+
+        Image
+        {
+            id: imageTag
+
+            anchors.centerIn: parent
+
+            width : pSizeTag
+            height: pSizeTag
+
+            smooth: false
         }
     }
 
