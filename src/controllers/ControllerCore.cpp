@@ -34,9 +34,12 @@
 #include <WViewDrag>
 #include <WWindow>
 #include <WCache>
-#include <WLoaderTorrent>
 #include <WLoaderVbml>
+#include <WLoaderTorrent>
 #include <WHookTorrent>
+#include <WTabsTrack>
+#include <WBackendVlc>
+#include <WBackendIndex>
 #include <WImageFilterColor>
 #include <WImageFilterMask>
 #include <WDeclarativeApplication>
@@ -78,6 +81,10 @@ ControllerCore::ControllerCore() : WController()
     _cache = NULL;
 
     _server = NULL;
+
+    _tabs = NULL;
+
+    _index = NULL;
 
     //---------------------------------------------------------------------------------------------
     // Settings
@@ -182,6 +189,8 @@ ControllerCore::ControllerCore() : WController()
     qmlRegisterUncreatableType<WAbstractHook>("Sky", 1,0, "AbstractHook",
                                               "AbstractHook is abstract");
 
+    qmlRegisterType<WBackendVlc>("Sky", 1,0, "BackendVlc");
+
     //---------------------------------------------------------------------------------------------
     // Context
 
@@ -252,6 +261,13 @@ ControllerCore::ControllerCore() : WController()
 
     wControllerFile->setCache(_cache);
 
+    //---------------------------------------------------------------------------------------------
+    // LoaderVbml
+
+    WLoaderVbml * loaderVbml = new WLoaderVbml(this);
+
+    wControllerPlaylist->registerLoader(WBackendNetQuery::TypeVbml, loaderVbml);
+
 #ifndef SK_NO_TORRENT
     //---------------------------------------------------------------------------------------------
     // LoaderTorrent
@@ -263,11 +279,11 @@ ControllerCore::ControllerCore() : WController()
 #endif
 
     //---------------------------------------------------------------------------------------------
-    // LoaderVbml
+    // BroadcastServer
 
-    WLoaderVbml * loaderVbml = new WLoaderVbml(this);
+    _server = new WBroadcastServer(_local._broadcastPort, this);
 
-    wControllerPlaylist->registerLoader(WBackendNetQuery::TypeVbml, loaderVbml);
+    emit serverChanged();
 
     //---------------------------------------------------------------------------------------------
     // Torrents
@@ -276,11 +292,30 @@ ControllerCore::ControllerCore() : WController()
                         _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
 
     //---------------------------------------------------------------------------------------------
-    // BroadcastServer
+    // Tabs
 
-    _server = new WBroadcastServer(_local._broadcastPort, this);
+    _tabs = new WTabsTrack(this);
 
-    emit serverChanged();
+    _tabs->setId(1);
+
+    _tabs->setMaxCount(1);
+
+    _tabs->addTab();
+
+    emit tabsChanged();
+
+    //---------------------------------------------------------------------------------------------
+    // Backends
+
+    QString path = _path + "/backend/";
+
+    if (QFile::exists(path) == false)
+    {
+        WControllerFileReply * reply = copyBackends(path);
+
+        connect(reply, SIGNAL(complete(bool)), this, SLOT(onLoaded()));
+    }
+    else createIndex();
 
     //---------------------------------------------------------------------------------------------
     // DataOnline
@@ -311,6 +346,15 @@ ControllerCore::ControllerCore() : WController()
         return true;
     }
     else return false;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/* Q_INVOKABLE */ void ControllerCore::resetBackends() const
+{
+    WControllerFileReply * reply = copyBackends(_path + "/backend/");
+
+    connect(reply, SIGNAL(complete(bool)), this, SLOT(onReload()));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -359,9 +403,10 @@ ControllerCore::ControllerCore() : WController()
 /* Q_INVOKABLE static */ void ControllerCore::applyHooks(WDeclarativePlayer * player)
 {
 #ifdef SK_NO_TORRENT
-    return;
-#endif
+    Q_UNSUED(player);
 
+    return;
+#else
     Q_ASSERT(player);
 
     WAbstractBackend * backend = player->backend();
@@ -373,10 +418,75 @@ ControllerCore::ControllerCore() : WController()
     list.append(new WHookTorrent(backend));
 
     player->setHooks(list);
+#endif
+}
+
+//-------------------------------------------------------------------------------------------------
+// Private functions
+//-------------------------------------------------------------------------------------------------
+
+void ControllerCore::createIndex()
+{
+    _index = new WBackendIndex(WControllerFile::fileUrl(_path + "/backend"));
+
+    connect(_index, SIGNAL(loaded()), this, SLOT(onIndexLoaded()));
+
+    emit indexChanged();
+}
+
+WControllerFileReply * ControllerCore::copyBackends(const QString & path) const
+{
+#ifdef SK_DEPLOY
+#ifdef Q_OS_ANDROID
+    return WControllerPlaylist::copyBackends("assets:/backend", path);
+#else
+    return WControllerPlaylist::copyBackends(WControllerFile::applicationPath("backend"), path);
+#endif
+#else
+    return WControllerPlaylist::copyBackends(WControllerFile::applicationPath(PATH_BACKEND), path);
+#endif
 }
 
 //-------------------------------------------------------------------------------------------------
 // Private slots
+//-------------------------------------------------------------------------------------------------
+
+void ControllerCore::onLoaded()
+{
+    createIndex();
+}
+
+void ControllerCore::onIndexLoaded()
+{
+    disconnect(_index, SIGNAL(loaded()), this, SLOT(onIndexLoaded()));
+
+#if defined(SK_BACKEND_LOCAL) && defined(SK_DEPLOY) == false
+    // NOTE: This makes sure that we have the latest local vbml loaded.
+    resetBackends();
+
+    // NOTE: We want to reload backends when the folder changes.
+    _watcher.addFolder(WControllerFile::applicationPath(PATH_BACKEND));
+
+    connect(&_watcher, SIGNAL(foldersModified(const QString &, const QStringList &)),
+            this,      SLOT(resetBackends()));
+#else
+    _index->update();
+#endif
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void ControllerCore::onReload()
+{
+    if (_index == NULL) return;
+
+    _index->clearCache();
+
+    _index->reload();
+
+    _index->reloadBackends();
+}
+
 //-------------------------------------------------------------------------------------------------
 
 void ControllerCore::onSource(const QString & source)
@@ -393,4 +503,9 @@ void ControllerCore::onSource(const QString & source)
 WBroadcastServer * ControllerCore::server()
 {
     return _server;
+}
+
+WTabsTrack * ControllerCore::tabs() const
+{
+    return _tabs;
 }

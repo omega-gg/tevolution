@@ -19,6 +19,9 @@
 
 // Sk includes
 #include <WController>
+#ifndef SK_DEPLOY
+#include <WFileWatcher>
+#endif
 
 // Application includes
 #include <DataLocal>
@@ -27,11 +30,14 @@
 #define core ControllerCore::instance()
 
 // Forward declarations
+class WControllerFileReply;
 class DataOnline;
 class WAbstractBackend;
 class WAbstractHook;
 class WCache;
 class WBroadcastServer;
+class WBackendIndex;
+class WTabsTrack;
 class WDeclarativePlayer;
 
 class ControllerCore : public WController
@@ -39,6 +45,8 @@ class ControllerCore : public WController
     Q_OBJECT
 
     Q_PROPERTY(WBroadcastServer * server READ server NOTIFY serverChanged)
+
+    Q_PROPERTY(WTabsTrack * tabs READ tabs NOTIFY tabsChanged)
 
 private:
     ControllerCore();
@@ -52,6 +60,8 @@ public: // Interface
 
     Q_INVOKABLE bool updateVersion();
 
+    Q_INVOKABLE void resetBackends() const;
+
     Q_INVOKABLE void generateSource();
 
     Q_INVOKABLE void generateTag(const QString & text);
@@ -64,7 +74,17 @@ public: // Static functions
 
     Q_INVOKABLE static void applyHooks(WDeclarativePlayer * player);
 
+private: // Functions
+    void createIndex();
+
+    WControllerFileReply * copyBackends(const QString & path) const;
+
 private slots:
+    void onLoaded     ();
+    void onIndexLoaded();
+
+    void onReload();
+
     void onSource(const QString & source);
 
 signals:
@@ -72,8 +92,14 @@ signals:
 
     void serverChanged();
 
+    void tabsChanged();
+
+    void indexChanged();
+
 public: // Properties
     WBroadcastServer * server();
+
+    WTabsTrack * tabs() const;
 
 private: // Variables
 #ifdef SK_DESKTOP
@@ -88,6 +114,14 @@ private: // Variables
     WBroadcastServer * _server;
 
     QString _path;
+
+    WTabsTrack * _tabs;
+
+    WBackendIndex * _index;
+
+#ifndef SK_DEPLOY
+    WFileWatcher _watcher;
+#endif
 
 private:
     Q_DISABLE_COPY      (ControllerCore)

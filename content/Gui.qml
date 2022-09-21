@@ -212,9 +212,15 @@ Item
     {
         id: player
 
+        anchors.fill: parent
+
         visible: false
 
+        backend: BackendVlc {}
+
         server: gui.server
+
+        Component.onCompleted: core.applyHooks(player)
     }
 
     Noise
