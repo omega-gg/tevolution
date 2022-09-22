@@ -283,6 +283,8 @@ ControllerCore::ControllerCore() : WController()
 
     _server = new WBroadcastServer(_local._broadcastPort, this);
 
+    _server->start();
+
     emit serverChanged();
 
     //---------------------------------------------------------------------------------------------
