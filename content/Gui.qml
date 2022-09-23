@@ -112,7 +112,7 @@ Item
 
     function getColor()
     {
-        if (/*cover.visible || */player.visible)
+        if (cover.visible || player.visible)
         {
              return "black";
         }
@@ -263,7 +263,7 @@ Item
 
         anchors.fill: parent
 
-        visible: (flag.opacity != 1.0)
+        visible: (player.visible == false && flag.opacity != 1.0)
 
         interval: st.noise_interval
 
