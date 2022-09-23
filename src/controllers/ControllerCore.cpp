@@ -38,6 +38,7 @@
 #include <WLoaderTorrent>
 #include <WHookTorrent>
 #include <WTabsTrack>
+#include <WTabTrack>
 #include <WBackendVlc>
 #include <WBackendIndex>
 #include <WImageFilterColor>
@@ -131,6 +132,15 @@ ControllerCore::ControllerCore() : WController()
     qmlRegisterType<WDeclarativeApplication>("Sky", 1,0, "Application");
 
     //---------------------------------------------------------------------------------------------
+    // Kernel
+
+    qmlRegisterUncreatableType<WAbstractTabs>("Sky", 1,0, "AbstractTabs",
+                                              "AbstractTabs is abstract");
+
+    qmlRegisterUncreatableType<WAbstractTab>("Sky", 1,0, "AbstractTab",
+                                             "AbstractTab is abstract");
+
+    //---------------------------------------------------------------------------------------------
     // Network
 
     qmlRegisterUncreatableType<WBroadcastServer>("Sky", 1,0, "BroadcastServer",
@@ -188,6 +198,9 @@ ControllerCore::ControllerCore() : WController()
 
     qmlRegisterUncreatableType<WAbstractHook>("Sky", 1,0, "AbstractHook",
                                               "AbstractHook is abstract");
+
+    qmlRegisterType<WTabsTrack>("Sky", 1,0, "TabsTrack");
+    qmlRegisterType<WTabTrack> ("Sky", 1,0, "TabTrack");
 
     qmlRegisterType<WBackendVlc>("Sky", 1,0, "BackendVlc");
 

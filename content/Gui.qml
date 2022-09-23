@@ -25,7 +25,11 @@ Item
     // Properties
     //---------------------------------------------------------------------------------------------
 
+    property bool asynchronous: true
+
     /* read */ property variant server: core.server
+
+    /* read */ property variant currentTab: core.tabs.currentTab
 
     //---------------------------------------------------------------------------------------------
     // Private
@@ -37,6 +41,10 @@ Item
 
     // NOTE: Margins are 56 pixels on a 512 tag.
     property int pSizeTag: pSize * 0.890625
+
+    property bool pAudio: (player.outputActive == AbstractBackend.OutputAudio || player.isAudio
+                           ||
+                           player.hasOutput)
 
     property int pDuration: st.ms1000
 
@@ -214,13 +222,39 @@ Item
 
         anchors.fill: parent
 
-        visible: false
+        visible: hasStarted
 
         backend: BackendVlc {}
 
         server: gui.server
 
+        tabs: core.tabs
+
         Component.onCompleted: core.applyHooks(player)
+    }
+
+    // FIXME: When resuming the player gets black right before starting.
+    //        So we make sure we have the cover in the foreground.
+    ImageScale
+    {
+        id: cover
+
+        anchors.fill: player
+
+        visible: (isSourceDefault == false
+                  &&
+                  (player.isStopped || player.isStarting || player.isResuming || pAudio))
+
+        source: currentTab.cover
+
+        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
+                                                                        : Image.PreserveAspectCrop
+
+        asynchronous: gui.asynchronous
+
+        // NOTE: When we switch from playback to the cover we want to avoid blinking on the
+        //       previous cover. So we load it now.
+        onVisibleChanged: if (visible) loadNow()
     }
 
     Noise
@@ -244,7 +278,7 @@ Item
 
         anchors.fill: parent
 
-        visible: (opacity != 0.0)
+        visible: (player.visible == false && cover.visible == false && opacity != 0.0)
 
         opacity: (pConnected) ? 1.0 : 0.0
 
@@ -270,8 +304,7 @@ Item
         width : pSize
         height: width
 
-        //visible: noise.visible
-        //opacity: noise.opacity
+        visible: (player.visible == false && cover.visible == false)
 
         source: st.picture_tag
 
