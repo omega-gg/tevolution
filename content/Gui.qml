@@ -25,6 +25,8 @@ Item
     // Properties
     //---------------------------------------------------------------------------------------------
 
+    /* read */ property int step: pGetStep()
+
     property bool asynchronous: true
 
     /* read */ property variant server: core.server
@@ -33,8 +35,6 @@ Item
 
     //---------------------------------------------------------------------------------------------
     // Private
-
-    property bool pConnected: server.isConnected
 
     property int pSize: (st.isTight) ? height / 3
                                      : height / 2
@@ -108,15 +108,6 @@ Item
             window.idle = true;
         }
         else pRestoreFullScreen();
-    }
-
-    function getColor()
-    {
-        if (cover.visible || player.visible)
-        {
-             return "black";
-        }
-        else return st.window_color;
     }
 
     //---------------------------------------------------------------------------------------------
@@ -196,6 +187,20 @@ Item
 //#END
     }
 
+    function pGetStep()
+    {
+        if (player.hasStarted)
+        {
+            return 3;
+        }
+        else if (server.isConnected)
+        {
+            if (player.source) return 2;
+            else               return 1;
+        }
+        else return 0;
+    }
+
     //---------------------------------------------------------------------------------------------
     // Children
     //---------------------------------------------------------------------------------------------
@@ -216,6 +221,27 @@ Item
     }
 //#END
 
+    Rectangle
+    {
+        anchors.fill: parent
+
+        visible: (opacity != 0.0)
+
+        opacity: (step > 1) ? 1.0 : 0.0
+
+        color: "black"
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
+    }
+
     Player
     {
         id: player
@@ -233,43 +259,31 @@ Item
         Component.onCompleted: core.applyHooks(player)
     }
 
-    // FIXME: When resuming the player gets black right before starting.
-    //        So we make sure we have the cover in the foreground.
-    ImageScale
-    {
-        id: cover
-
-        anchors.fill: player
-
-        visible: (isSourceDefault == false
-                  &&
-                  (player.isStopped || player.isStarting || player.isResuming || pAudio))
-
-        source: currentTab.cover
-
-        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
-                                                                        : Image.PreserveAspectCrop
-
-        asynchronous: gui.asynchronous
-
-        // NOTE: When we switch from playback to the cover we want to avoid blinking on the
-        //       previous cover. So we load it now.
-        onVisibleChanged: if (visible) loadNow()
-    }
-
     Noise
     {
         id: noise
 
         anchors.fill: parent
 
-        visible: (player.visible == false && flag.opacity != 1.0)
+        visible: (opacity != 0.0)
+
+        opacity: (step == 0) ? 1.0 : 0.0
 
         interval: st.noise_interval
 
         fillMode: Noise.PreserveAspectCrop
 
         color: st.noise_color
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
     }
 
     AnimatedSlideImage
@@ -278,9 +292,9 @@ Item
 
         anchors.fill: parent
 
-        visible: (player.visible == false && cover.visible == false && opacity != 0.0)
+        visible: (opacity != 0.0)
 
-        opacity: (pConnected) ? 1.0 : 0.0
+        opacity: (step == 1) ? 1.0 : 0.0
 
         source: st.picture_flag
 
@@ -304,7 +318,9 @@ Item
         width : pSize
         height: width
 
-        visible: (player.visible == false && cover.visible == false)
+        visible: (opacity != 0.0)
+
+        opacity: (step < 2) ? 1.0 : 0.0
 
         source: st.picture_tag
 
@@ -320,6 +336,54 @@ Item
             height: pSizeTag
 
             smooth: false
+        }
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
+    }
+
+    // FIXME: When resuming the player gets black right before starting.
+    //        So we make sure we have the cover in the foreground.
+    ImageScale
+    {
+        id: cover
+
+        anchors.fill: player
+
+        visible: (opacity != 0.0)
+
+        opacity: (step == 2) ? 1.0 : 0.0
+
+        //visible: (isSourceDefault == false
+        //          &&
+        //          (player.isStopped || player.isStarting || player.isResuming || pAudio))
+
+        source: currentTab.cover
+
+        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
+                                                                        : Image.PreserveAspectCrop
+
+        asynchronous: gui.asynchronous
+
+        // NOTE: When we switch from playback to the cover we want to avoid blinking on the
+        //       previous cover. So we load it now.
+        //onVisibleChanged: if (visible) loadNow()
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
         }
     }
 
