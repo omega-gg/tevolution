@@ -46,6 +46,11 @@ Item
                            ||
                            player.hasOutput)
 
+    property string pCover: ""
+
+    //---------------------------------------------------------------------------------------------
+    // Style
+
     property int pDuration: st.ms1000
 
     //---------------------------------------------------------------------------------------------
@@ -199,6 +204,18 @@ Item
             else               return 1;
         }
         else return 0;
+    }
+
+    function pGetCover()
+    {
+        var cover = currentTab.cover;
+
+        // NOTE: We want to avoid a blank cover when the track is loading.
+        if (currentTab.isLoading && cover == "")
+        {
+            return pCover;
+        }
+        else return cover;
     }
 
     //---------------------------------------------------------------------------------------------
@@ -365,7 +382,9 @@ Item
         //          &&
         //          (player.isStopped || player.isStarting || player.isResuming || pAudio))
 
-        source: currentTab.cover
+        source: pGetCover()
+
+        sourceDefault: st.picture_tag
 
         fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
                                                                         : Image.PreserveAspectCrop
@@ -374,7 +393,9 @@ Item
 
         // NOTE: When we switch from playback to the cover we want to avoid blinking on the
         //       previous cover. So we load it now.
-        //onVisibleChanged: if (visible) loadNow()
+        onVisibleChanged: if (visible) loadNow()
+
+        onSourceChanged: pCover = source
 
         Behavior on opacity
         {
