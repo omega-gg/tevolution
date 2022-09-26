@@ -376,7 +376,9 @@ Item
 
         visible: (opacity != 0.0)
 
-        opacity: (step == 2) ? 1.0 : 0.0
+        opacity: (step > 1
+                  &&
+                  player.isStopped || player.isStarting || player.isResuming || pAudio) ? 1.0 : 0.0
 
         //visible: (isSourceDefault == false
         //          &&
@@ -384,7 +386,7 @@ Item
 
         source: pGetCover()
 
-        sourceDefault: st.picture_tag
+        sourceDefault: st.picture_flag
 
         fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
                                                                         : Image.PreserveAspectCrop
