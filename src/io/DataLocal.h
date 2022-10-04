@@ -43,6 +43,7 @@ private: // Functions
 signals:
     void vsyncChanged();
 
+#ifndef SK_NO_TORRENT
     void torrentPortChanged();
 
     void torrentConnectionsChanged();
@@ -51,6 +52,7 @@ signals:
     void torrentDownloadChanged();
 
     void torrentCacheChanged();
+#endif
 
     void broadcastPortChanged();
 
@@ -58,6 +60,7 @@ public: // Properties
     bool vsync() const;
     void setVsync(bool enabled);
 
+#ifndef SK_NO_TORRENT
     int  torrentPort() const;
     void setTorrentPort(int port);
 
@@ -72,6 +75,7 @@ public: // Properties
 
     int  torrentCache() const;
     void setTorrentCache(int cache);
+#endif
 
     int  broadcastPort() const;
     void setBroadcastPort(int port);
@@ -81,6 +85,7 @@ private: // Variables
 
     bool _vsync;
 
+#ifndef SK_NO_TORRENT
     int _torrentPort;
 
     int _torrentConnections;
@@ -89,6 +94,7 @@ private: // Variables
     int _torrentDownload;
 
     int _torrentCache;
+#endif
 
     int _broadcastPort;
 

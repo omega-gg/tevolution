@@ -26,9 +26,7 @@
 #include <WControllerDeclarative>
 #include <WControllerPlaylist>
 #include <WControllerMedia>
-#ifndef SK_NO_TORRENT
 #include <WControllerTorrent>
-#endif
 #include <WBroadcastServer>
 #include <WViewResizer>
 #include <WViewDrag>
@@ -298,11 +296,13 @@ ControllerCore::ControllerCore() : WController()
 
     emit serverChanged();
 
+#ifndef SK_NO_TORRENT
     //---------------------------------------------------------------------------------------------
     // Torrents
 
     applyTorrentOptions(_local._torrentConnections,
                         _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
+#endif
 
     //---------------------------------------------------------------------------------------------
     // Tabs
@@ -440,7 +440,11 @@ ControllerCore::ControllerCore() : WController()
 
 void ControllerCore::createIndex()
 {
-    _index = new WBackendIndex(WControllerFile::fileUrl(_path + "/backend"));
+#ifdef SK_NO_TORRENT
+    _index = new WBackendIndex(WControllerFile::fileUrl(_path + "/backend/indexLite.vbml"));
+#else
+    _index = new WBackendIndex(WControllerFile::fileUrl(_path + "/backend/index.vbml"));
+#endif
 
     connect(_index, SIGNAL(loaded()), this, SLOT(onIndexLoaded()));
 

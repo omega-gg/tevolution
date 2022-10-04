@@ -69,6 +69,7 @@ public: // Variables
 
     bool vsync;
 
+#ifndef SK_NO_TORRENT
     int torrentPort;
 
     int torrentConnections;
@@ -77,6 +78,7 @@ public: // Variables
     int torrentDownload;
 
     int torrentCache;
+#endif
 
     int broadcastPort;
 };
@@ -113,6 +115,7 @@ public: // Variables
 
     stream.writeTextElement("vsync", QString::number(vsync));
 
+#ifndef SK_NO_TORRENT
     stream.writeTextElement("torrentPort", QString::number(torrentPort));
 
     stream.writeTextElement("torrentConnections", QString::number(torrentConnections));
@@ -121,6 +124,7 @@ public: // Variables
     stream.writeTextElement("torrentDownload", QString::number(torrentDownload));
 
     stream.writeTextElement("torrentCache", QString::number(torrentCache));
+#endif
 
     stream.writeTextElement("broadcastPort", QString::number(broadcastPort));
 
@@ -146,6 +150,7 @@ public: // Variables
     _vsync = true;
 #endif
 
+#ifndef SK_NO_TORRENT
     _torrentPort = DATALOCAL_PORT;
 
     // FIXME: Let's try 200 because why not ?
@@ -155,6 +160,7 @@ public: // Variables
     _torrentDownload = 0;
 
     _torrentCache = 2000;
+#endif
 
     _broadcastPort = DATALOCAL_BROADCAST_PORT;
 }
@@ -201,6 +207,7 @@ public: // Variables
 
     action->vsync = _vsync;
 
+#ifndef SK_NO_TORRENT
     action->torrentPort = _torrentPort;
 
     action->torrentConnections = _torrentConnections;
@@ -209,6 +216,7 @@ public: // Variables
     action->torrentDownload = _torrentDownload;
 
     action->torrentCache = _torrentCache;
+#endif
 
     action->broadcastPort = _broadcastPort;
 
@@ -246,6 +254,7 @@ bool DataLocal::extract(const QByteArray & array)
 
     _vsync = WControllerXml::readNextInt(&stream);
 
+#ifndef SK_NO_TORRENT
     //---------------------------------------------------------------------------------------------
     // torrentPort
 
@@ -280,6 +289,7 @@ bool DataLocal::extract(const QByteArray & array)
     if (WControllerXml::readNextStartElement(&stream, "torrentCache") == false) return false;
 
     _torrentCache = WControllerXml::readNextInt(&stream);
+#endif
 
     //---------------------------------------------------------------------------------------------
     // broadcastPort
@@ -314,6 +324,8 @@ void DataLocal::setVsync(bool enabled)
 }
 
 //-------------------------------------------------------------------------------------------------
+
+#ifndef SK_NO_TORRENT
 
 int DataLocal::torrentPort() const
 {
@@ -403,12 +415,14 @@ void DataLocal::setTorrentCache(int cache)
     save();
 }
 
+#endif
+
+//-------------------------------------------------------------------------------------------------
+
 int DataLocal::broadcastPort() const
 {
     return _broadcastPort;
 }
-
-//-------------------------------------------------------------------------------------------------
 
 void DataLocal::setBroadcastPort(int port)
 {
