@@ -69,8 +69,10 @@ public: // Interface
     Q_INVOKABLE void clearCache();
 
 public: // Static functions
+#ifndef SK_NO_TORRENT
     Q_INVOKABLE static void applyTorrentOptions(int connections,
                                                 int upload, int download, int cache);
+#endif
 
     Q_INVOKABLE static void applyHooks(WDeclarativePlayer * player);
 

@@ -329,7 +329,7 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "iOS" ]; then
 
-    defines="$defines MOBILE IOS"
+    defines="$defines MOBILE IOS NO_TORRENT"
 
 elif [ $1 = "linux" ]; then
 

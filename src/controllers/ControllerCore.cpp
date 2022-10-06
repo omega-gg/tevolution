@@ -398,18 +398,18 @@ ControllerCore::ControllerCore() : WController()
 // Static functions
 //-------------------------------------------------------------------------------------------------
 
+#ifndef SK_NO_TORRENT
+
 /* Q_INVOKABLE static */ void ControllerCore::applyTorrentOptions(int connections,
                                                                   int upload, int download,
                                                                   int cache)
 {
-#ifdef SK_NO_TORRENT
-    Q_UNUSED(connections); Q_UNUSED(upload); Q_UNUSED(download); Q_UNUSED(cache);
-#else
     wControllerTorrent->setOptions(connections, upload * 1024, download * 1024);
 
     wControllerTorrent->setSizeMax(qint64(cache) * 1048576);
-#endif
 }
+
+#endif
 
 //-------------------------------------------------------------------------------------------------
 
