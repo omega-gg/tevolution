@@ -203,6 +203,7 @@ OTHER_FILES += 3rdparty.sh \
                AUTHORS.md \
                .azure-pipelines.yml \
                content/generate.sh \
+               content/icons.sh \
                content/Main.qml \
                content/StyleApplication.qml \
                content/Gui.qml \

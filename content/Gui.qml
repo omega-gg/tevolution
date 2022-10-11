@@ -36,6 +36,10 @@ Item
     //---------------------------------------------------------------------------------------------
     // Private
 
+//#!MOBILE
+    property bool pVersion: (online.version && online.version != sk.version)
+//#END
+
     property int pSize: (st.isTight) ? height / 3
                                      : height / 2
 
@@ -407,6 +411,42 @@ Item
 
                 easing.type: st.easing
             }
+        }
+    }
+
+    ButtonTouchIcon
+    {
+        margins: st.dp8
+
+//#MOBILE
+        // NOTE mobile: For now, updates are handled through the stores.
+        visible: false
+//#ELSE
+        visible: pVersion
+//#END
+
+        highlighted: isFocused
+
+        icon: st.icon_download
+
+        onClicked:
+        {
+            // NOTE: We add a two step click to avoid updating by mistake.
+            if (isFocused == false)
+            {
+                setFocus();
+
+                return;
+            }
+
+            if (core.updateVersion())
+            {
+                window.close();
+
+                return;
+            }
+
+            Qt.openUrlExternally("https://omega.gg/tevolution/get");
         }
     }
 

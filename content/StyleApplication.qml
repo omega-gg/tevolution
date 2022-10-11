@@ -29,6 +29,11 @@ StyleTouch
     property color noise_color: "#b4b4b4"
 
     //---------------------------------------------------------------------------------------------
+    // Icons
+
+    property url icon_download: "icons/download.svg"
+
+    //---------------------------------------------------------------------------------------------
     // Pictures
 
     property url picture_tag : "pictures/tag.svg"

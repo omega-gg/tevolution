@@ -29,7 +29,7 @@
 //-------------------------------------------------------------------------------------------------
 // Static variables
 
-static const QString ONLINE_PATH = "http://omega.gg/get/tevolution/1.0.0/data.xml";
+static const QString ONLINE_PATH = "https://omega.gg/get/tevolution/1.0.0/data.xml";
 
 //-------------------------------------------------------------------------------------------------
 // Ctor / dtor
