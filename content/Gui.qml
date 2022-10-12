@@ -50,7 +50,13 @@ Item
                            ||
                            player.hasOutput)
 
+    property bool pCoverActive: (step > 1 && player.isStopped || player.isStarting
+                                 ||
+                                 player.isResuming || pAudio)
+
     property string pCover: ""
+
+    property int pStep: -1
 
     //---------------------------------------------------------------------------------------------
     // Style
@@ -86,6 +92,23 @@ Item
         opacity = 1.0;
 
         core.generateSource();
+    }
+
+    onPCoverActiveChanged:
+    {
+        if (pStep < 2 || (pStep == 2 && step == 1))
+        {
+            behaviorOpacity.enabled = true;
+
+            if (pCoverActive) cover.opacity = 1.0;
+            else              cover.opacity = 0.0;
+
+            behaviorOpacity.enabled = false;
+        }
+        else if (pCoverActive) cover.opacity = 1.0;
+        else                   cover.opacity = 0.0;
+
+        pStep = step;
     }
 
     //---------------------------------------------------------------------------------------------
@@ -379,14 +402,7 @@ Item
         anchors.fill: player
 
         visible: (opacity != 0.0)
-
-        opacity: (step > 1
-                  &&
-                  player.isStopped || player.isStarting || player.isResuming || pAudio) ? 1.0 : 0.0
-
-        //visible: (isSourceDefault == false
-        //          &&
-        //          (player.isStopped || player.isStarting || player.isResuming || pAudio))
+        opacity: 0.0
 
         source: pGetCover()
 
@@ -405,6 +421,10 @@ Item
 
         Behavior on opacity
         {
+            id: behaviorOpacity
+
+            enabled: false
+
             PropertyAnimation
             {
                 duration: pDuration
