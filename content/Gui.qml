@@ -411,13 +411,23 @@ Item
         fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
                                                                         : Image.PreserveAspectCrop
 
-        asynchronous: gui.asynchronous
-
         // NOTE: When we switch from playback to the cover we want to avoid blinking on the
-        //       previous cover. So we load it now.
-        onVisibleChanged: if (visible) loadNow()
+        //       previous cover.
+        onVisibleChanged:
+        {
+            if (visible) return;
 
-        onSourceChanged: pCover = source
+            // NOTE: Disabling asynchronous so we can load the cover as fast as possible before it
+            //       gets visible.
+            asynchronous = false;
+        }
+
+        onSourceChanged:
+        {
+            pCover = source;
+
+            asynchronous = gui.asynchronous;
+        }
 
         Behavior on opacity
         {
