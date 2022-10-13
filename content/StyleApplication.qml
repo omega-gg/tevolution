@@ -36,8 +36,9 @@ StyleTouch
     //---------------------------------------------------------------------------------------------
     // Pictures
 
-    property url picture_tag : "pictures/tag.svg"
-    property url picture_flag: "pictures/flag.svg"
+    property url picture_tag   : "pictures/tag.svg"
+    property url picture_flag  : "pictures/flag.svg"
+    property url picture_loader: "pictures/loader.svg"
 
     //---------------------------------------------------------------------------------------------
     // Settings
