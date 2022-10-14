@@ -46,6 +46,8 @@ Item
     // NOTE: Margins are 56 pixels on a 512 tag.
     property int pSizeTag: pSize * 0.890625
 
+    property int pSizeLoader: height / 128
+
     property bool pAudio: (player.outputActive == AbstractBackend.OutputAudio || player.isAudio
                            ||
                            player.hasOutput)
@@ -438,6 +440,31 @@ Item
             PropertyAnimation
             {
                 duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
+    }
+
+    AnimatedSlideImage
+    {
+        anchors.left  : parent.left
+        anchors.right : parent.right
+        anchors.bottom: parent.bottom
+
+        height: pSizeLoader
+
+        visible: (opacity != 0.0)
+
+        opacity: (player.isPlaying && player.isLoading) ? 0.8 : 0.0
+
+        source: st.picture_flag
+
+        Behavior on opacity
+        {
+            PropertyAnimation
+            {
+                duration: st.duration_faster
 
                 easing.type: st.easing
             }
