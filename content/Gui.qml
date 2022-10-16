@@ -204,11 +204,7 @@ Item
 
     function pClose()
     {
-        if (window.fullScreen)
-        {
-            pRestoreFullScreen();
-        }
-        else window.close();
+        window.close();
     }
 
     function pRestoreFullScreen()
