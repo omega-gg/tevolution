@@ -37,7 +37,7 @@ void DataLocal_patch(QString & data, const QString & api);
 static const int DATALOCAL_PORT = 8300;
 
 // NOTE: Defaut broadcasting port.
-static const int DATALOCAL_BROADCAST_PORT = 9100;
+static const int DATALOCAL_BROADCAST_PORT = 9300;
 
 //=================================================================================================
 // DataLocalWrite
