@@ -153,8 +153,17 @@ Item
 
     function onActiveChanged()
     {
-        // NOTE: We want to avoid screen dimming at all time.
-        sk.screenDimEnabled = window.isActive;
+        // NOTE: When active we want to avoid screen savers at all time.
+        if (window.active)
+        {
+            sk.screenDimEnabled   = false;
+            sk.screenSaverEnabled = false;
+        }
+        else
+        {
+            sk.screenDimEnabled   = true;
+            sk.screenSaverEnabled = true;
+        }
     }
 
     function onIdleChanged()
