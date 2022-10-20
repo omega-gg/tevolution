@@ -451,6 +451,16 @@ Item
         }
     }
 
+    Subtitle
+    {
+        player: player
+
+        function onUpdateMargin()
+        {
+            margin = applySize(player, cover);
+        }
+    }
+
     AnimatedSlideImage
     {
         anchors.left  : parent.left
