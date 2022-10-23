@@ -154,7 +154,7 @@ Item
     function onActiveChanged()
     {
         // NOTE: When active we want to avoid screen savers at all time.
-        if (window.active)
+        if (window.isActive)
         {
             sk.screenDimEnabled   = false;
             sk.screenSaverEnabled = false;
