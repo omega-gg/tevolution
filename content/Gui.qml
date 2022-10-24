@@ -168,11 +168,8 @@ Item
 
     function onIdleChanged()
     {
-        if (window.idle && player.isPlaying)
-        {
-             sk.cursorVisible = false;
-        }
-        else sk.cursorVisible = true;
+        if (window.idle) sk.cursorVisible = false;
+        else             sk.cursorVisible = true;
     }
 
     //---------------------------------------------------------------------------------------------
