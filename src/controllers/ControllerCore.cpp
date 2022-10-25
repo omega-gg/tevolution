@@ -22,6 +22,7 @@
 // Sk includes
 #include <WControllerApplication>
 #include <WControllerFile>
+#include <WControllerNetwork>
 #include <WControllerView>
 #include <WControllerDeclarative>
 #include <WControllerPlaylist>
@@ -342,6 +343,8 @@ ControllerCore::ControllerCore() : WController()
 
     qmlRegisterType<DataOnline>("Sky", 1,0, "DataOnline");
 
+    wControllerDeclarative->setContextProperty("controllerNetwork", wControllerNetwork);
+
     wControllerDeclarative->setContextProperty("online", _online);
 
     //---------------------------------------------------------------------------------------------
@@ -374,13 +377,21 @@ ControllerCore::ControllerCore() : WController()
 
 //-------------------------------------------------------------------------------------------------
 
+/* Q_INVOKABLE */ void ControllerCore::generateTag(const QString & vbml, const QString & prefix)
+{
+    if (vbml.isEmpty()) return;
+
+    WBarcodeWriter::startWrite(vbml, this, SIGNAL(tagUpdated(const QImage &)),
+                               WBarcodeWriter::Vbml, prefix);
+}
+
 /* Q_INVOKABLE */ void ControllerCore::generateSource()
 {
     WBroadcastServer::startSource(_local._broadcastPort, "https://vbml.omega.gg/connect",
                                   this, SLOT(onSource(const QString &)));
 }
 
-/* Q_INVOKABLE */ void ControllerCore::generateTag(const QString & text)
+/* Q_INVOKABLE */ void ControllerCore::generateSourceTag(const QString & text)
 {
     WBarcodeWriter::startWrite(text, this, SIGNAL(tagUpdated(const QImage &)));
 }
@@ -512,7 +523,7 @@ void ControllerCore::onSource(const QString & source)
 {
     qDebug("Server source: %s", source.C_STR);
 
-    generateTag(source);
+    generateSourceTag(source);
 }
 
 //-------------------------------------------------------------------------------------------------

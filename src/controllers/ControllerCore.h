@@ -62,9 +62,11 @@ public: // Interface
 
     Q_INVOKABLE void resetBackends() const;
 
+    Q_INVOKABLE void generateTag(const QString & vbml, const QString & prefix);
+
     Q_INVOKABLE void generateSource();
 
-    Q_INVOKABLE void generateTag(const QString & text);
+    Q_INVOKABLE void generateSourceTag(const QString & text);
 
     Q_INVOKABLE void clearCache();
 

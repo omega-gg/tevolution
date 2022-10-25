@@ -448,6 +448,15 @@ Item
         }
     }
 
+    Loader
+    {
+        anchors.fill: parent
+
+        source: (step) ? "PageTag.qml" : ""
+
+        asynchronous: true
+    }
+
     Subtitle
     {
         player: player
