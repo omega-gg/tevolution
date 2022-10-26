@@ -52,9 +52,9 @@ Item
                            ||
                            player.hasOutput)
 
-    property bool pCoverActive: (step > 1 && player.isStopped || player.isStarting
-                                 ||
-                                 player.isResuming || pAudio)
+    property bool pCoverActive: (step > 1 && (player.isStopped || player.isStarting
+                                              ||
+                                              player.isResuming || pAudio))
 
     property string pCover: ""
 
