@@ -121,7 +121,7 @@ Item
     {
         target: core
 
-        /* QML_CONNECTION */ function onTagUpdated(image)
+        /* QML_CONNECTION */ function onTagSourceUpdated(image)
         {
             imageTag.applyImage(image);
         }
@@ -452,7 +452,7 @@ Item
     {
         anchors.fill: parent
 
-        source: (step) ? "PageTag.qml" : ""
+        source: (step > 1 && player.videoTag) ? "PageTag.qml" : ""
 
         asynchronous: true
     }

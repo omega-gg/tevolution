@@ -393,7 +393,7 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::generateSourceTag(const QString & text)
 {
-    WBarcodeWriter::startWrite(text, this, SIGNAL(tagUpdated(const QImage &)));
+    WBarcodeWriter::startWrite(text, this, SIGNAL(tagSourceUpdated(const QImage &)));
 }
 
 //-------------------------------------------------------------------------------------------------

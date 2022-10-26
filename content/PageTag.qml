@@ -38,12 +38,7 @@ Item
     // Events
     //---------------------------------------------------------------------------------------------
 
-    Component.onCompleted:
-    {
-        pUpdateTag();
-
-        opacity = 1.0;
-    }
+    Component.onCompleted: pUpdateTag()
 
     //---------------------------------------------------------------------------------------------
     // Connections
@@ -56,6 +51,9 @@ Item
         /* QML_CONNECTION */ function onTagUpdated(image)
         {
             imageTag.applyImage(image);
+
+            // NOTE: We want to display the tag once the image is ready.
+            opacity = 1.0;
         }
     }
 
