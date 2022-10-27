@@ -161,6 +161,10 @@ Item
         }
         else
         {
+//#MOBILE
+            player.pause();
+//#END
+
             sk.screenDimEnabled   = true;
             sk.screenSaverEnabled = true;
         }
