@@ -313,6 +313,80 @@ Item
         window.close();
     }
 
+    function pTakeShotB() // iOS
+    {
+        window.clearHover();
+
+        window.hoverEnabled = false;
+
+        window.borderSize = 0;
+
+        var path = "../dist/pictures/iOS";
+
+        pLoadShotA();
+
+        pSaveShotC(path + "/A");
+
+        pLoadShotB();
+
+        pSaveShotC(path + "/B");
+
+        pLoadShotC();
+
+        pSaveShotC(path + "/C");
+
+        pLoadShotD();
+
+        pSaveShotC(path + "/D");
+
+        window.compressShots(path);
+
+        window.close();
+    }
+
+    function pTakeShotC() // Android
+    {
+        window.clearHover();
+
+        window.hoverEnabled = false;
+
+        window.borderSize = 0;
+
+        st.ratio = 1.0;
+
+        window.width  = 1024;
+        window.height = 500;
+
+        var path = "../dist/pictures/android";
+
+        pLoadShotA();
+
+        pSaveShotB(path + "/MotionMonkey.jpg", 90);
+
+        st.ratio = 3.497;
+
+        window.width  = 2560;
+        window.height = 1440;
+
+        pSaveShotB(path + "/MotionMonkeyMobileA.jpg", -1);
+
+        pLoadShotB();
+
+        pSaveShotB(path + "/MotionMonkeyMobileB.jpg", -1);
+
+        pLoadShotC();
+
+        pSaveShotB(path + "/MotionMonkeyMobileC.jpg", -1);
+
+        pLoadShotD();
+
+        pSaveShotB(path + "/MotionMonkeyMobileD.jpg", -1);
+
+        window.compressShots(path);
+
+        window.close();
+    }
+
     //---------------------------------------------------------------------------------------------
 
     function pLoadShotA()
@@ -359,6 +433,36 @@ Item
 
         window.saveShot(path);
     }
+
+    function pSaveShotB(path, quality)
+    {
+        sk.wait(1000);
+
+        window.saveShot(path, 0, 0, -1, -1, "jpg", quality);
+    }
+
+    function pSaveShotC(path)
+    {
+        st.ratio = 3.0;
+
+        window.width  = 2688;
+        window.height = 1242;
+
+        pSaveShotB(path + "A.jpg", -1);
+
+        window.width  = 2208;
+        window.height = 1242;
+
+        pSaveShotB(path + "B.jpg", -1);
+
+        st.ratio = 2.0;
+
+        window.width  = 2732;
+        window.height = 2048;
+
+        pSaveShotB(path + "C.jpg", -1);
+    }
+
 //#END
 
     //---------------------------------------------------------------------------------------------
