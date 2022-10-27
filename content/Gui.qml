@@ -199,6 +199,26 @@ Item
 
             toggleFullScreen()
         }
+//#!DEPLOY
+        else if (event.key == Qt.Key_F10)
+        {
+            event.accepted = true;
+
+            pTakeShotC();
+        }
+        else if (event.key == Qt.Key_F11)
+        {
+            event.accepted = true;
+
+            pTakeShotB();
+        }
+        else if (event.key == Qt.Key_F12)
+        {
+            event.accepted = true;
+
+            pTakeShotA();
+        }
+//#END
     }
 
     function onKeyReleased(event) {}
@@ -253,6 +273,94 @@ Item
         else return cover;
     }
 
+//#!DEPLOY
+    //---------------------------------------------------------------------------------------------
+    // Dev
+
+    function pTakeShotA() // Desktop
+    {
+        window.clearHover();
+
+        window.hoverEnabled = false;
+
+        var width = 1920;
+
+        window.width  = width;
+        window.height = width * 0.5625; // 16:9 ratio
+
+        st.ratio = 2.0;
+
+        var path = "../dist/screens";
+
+        pLoadShotA();
+
+        pSaveShotA(path + "/tevolutionA.png");
+
+        pLoadShotB();
+
+        pSaveShotA(path + "/tevolutionB.png");
+
+        pLoadShotC();
+
+        pSaveShotA(path + "/tevolutionC.png");
+
+        pLoadShotD();
+
+        pSaveShotA(path + "/tevolutionD.png");
+
+        window.compressShots(path);
+
+        window.close();
+    }
+
+    //---------------------------------------------------------------------------------------------
+
+    function pLoadShotA()
+    {
+        core.generateSourceTag("https://omega.gg/tevolution");
+
+        // NOTE: Wait for the VideoTag to load.
+        sk.wait(2000);
+    }
+
+    function pLoadShotB()
+    {
+        step = 1;
+
+        flag.running = false;
+    }
+
+    function pLoadShotC()
+    {
+        step = 2;
+
+        core.sendMessage("https://www.youtube.com/watch?v=n5vjV4hwRxo");
+
+        // NOTE: Wait for the source to load.
+        sk.wait(2000);
+
+        itemLoading.running = false;
+
+        itemLoading.opacity = 1.0;
+    }
+
+    function pLoadShotD()
+    {
+        itemLoading.visible = false;
+
+        player.videoTag = true;
+    }
+
+    //---------------------------------------------------------------------------------------------
+
+    function pSaveShotA(path)
+    {
+        sk.wait(1000);
+
+        window.saveShot(path);
+    }
+//#END
+
     //---------------------------------------------------------------------------------------------
     // Children
     //---------------------------------------------------------------------------------------------
@@ -261,9 +369,6 @@ Item
     ViewDrag
     {
         anchors.fill: parent
-
-        // NOTE: This enables the PointingHandCursor during playback.
-        //hoverEnabled: player.isPlaying
 
         dragEnabled: (window.fullScreen == false)
 
@@ -473,6 +578,10 @@ Item
 
     AnimatedSlideImage
     {
+//#!DEPLOY
+        id: itemLoading
+//#!END
+
         anchors.left  : parent.left
         anchors.right : parent.right
         anchors.bottom: parent.bottom

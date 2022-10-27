@@ -6,6 +6,9 @@
 Designed to take streaming requests from a [Semantic Player](https://omega.gg/about/SemanticPlayer).<br>
 [omega](https://omega.gg/about) is building tevolution to empower people.<br>
 
+## tevolution Remote Player
+<a href="https://omega.gg/tevolution"><img src="dist/screens/tevolutionA.png" alt="tevolution" width="512px"></a>
+
 ## Technology
 
 tevolution is built in C++ with [Sky kit](https://omega.gg/Sky/sources).<br>

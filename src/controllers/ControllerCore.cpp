@@ -408,6 +408,25 @@ ControllerCore::ControllerCore() : WController()
 }
 
 //-------------------------------------------------------------------------------------------------
+
+#ifndef SK_DEPLOY
+
+/* Q_INVOKABLE */ void ControllerCore::sendMessage(const QString & source)
+{
+    if (_server == NULL) return;
+
+    QStringList parameters;
+
+    parameters.append(source);
+    parameters.append("-1");
+    parameters.append("-1");
+
+    emit _server->message(WBroadcastMessage(WBroadcastMessage::SOURCE, parameters));
+}
+
+#endif
+
+//-------------------------------------------------------------------------------------------------
 // Static functions
 //-------------------------------------------------------------------------------------------------
 

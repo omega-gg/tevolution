@@ -70,6 +70,10 @@ public: // Interface
 
     Q_INVOKABLE void clearCache();
 
+#ifndef SK_DEPLOY
+    Q_INVOKABLE void sendMessage(const QString & source);
+#endif
+
 public: // Static functions
 #ifndef SK_NO_TORRENT
     Q_INVOKABLE static void applyTorrentOptions(int connections,
