@@ -94,6 +94,9 @@ Item
         opacity = 1.0;
 
         core.generateSource();
+
+        // NOTE: Updating screen savers right away.
+        onActiveChanged();
     }
 
     onPCoverActiveChanged:
