@@ -465,7 +465,6 @@ Item
 
         pSaveShotB(path + "C.jpg", -1);
     }
-
 //#END
 
     //---------------------------------------------------------------------------------------------
@@ -687,7 +686,7 @@ Item
     {
 //#!DEPLOY
         id: itemLoading
-//#!END
+//#END
 
         anchors.left  : parent.left
         anchors.right : parent.right
