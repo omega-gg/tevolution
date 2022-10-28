@@ -8,15 +8,8 @@
 
     <!-- %%INSERT_PERMISSIONS -->
     <!-- NOTE: This is useful to keep the application alive for Chromecast playback. -->
-    <!-- NOTE: It seems we need to declare a service for this to have any effect. -->
+    <!-- FIXME: We need to declare a service for this to have any effect. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <!-- NOTE: This is useful if we want to open an image. -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!-- NOTE: This is useful if we want to write a file in DocumentsLocation. -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <!-- NOTE: This might be required for the camera. -->
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <!-- %%INSERT_FEATURES -->
 
@@ -70,12 +63,5 @@
             <meta-data android:name="android.app.splash_screen_drawable" android:resource="@drawable/splash"/>
             <meta-data android:name="android.app.splash_screen_sticky"   android:value="true"/>
         </activity>
-        <!-- NOTE: This part is required for sharing files with other applications. -->
-        <provider android:name="android.support.v4.content.FileProvider"
-                  android:authorities="gg.omega.provider"
-                  android:exported="false"
-                  android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
-        </provider>
     </application>
 </manifest>

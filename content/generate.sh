@@ -239,6 +239,10 @@ if [ $os = "mobile" -o "$2" = "all" -o "$2" = "deploy" ]; then
             expression='s/org.qtproject.qt./org.qtproject.qt5./g'
 
             apply $expression $qtX/src/gg/omega/WActivity.java
+
+            expression='s/gg.omega.provider/gg.omega.tevolution.provider/g'
+
+            apply $expression $qtX/src/gg/omega/WActivity.java
         fi
 
         copyAndroid $qtX/src
