@@ -164,7 +164,7 @@ Item
         }
         else
         {
-//#MOBILE
+//#ANDROID
             player.pause();
 //#END
 
