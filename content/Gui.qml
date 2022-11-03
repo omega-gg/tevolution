@@ -130,6 +130,18 @@ Item
         }
     }
 
+//#DESKTOP
+    Connections
+    {
+        target: server
+
+        /* QML_CONNECTION */ function onConnectedChanged()
+        {
+            if (server.isConnected) pActivate();
+        }
+    }
+//#END
+
     //---------------------------------------------------------------------------------------------
     // Functions
     //---------------------------------------------------------------------------------------------
@@ -234,6 +246,15 @@ Item
 
     //---------------------------------------------------------------------------------------------
     // Private
+
+//#DESKTOP
+    function pActivate()
+    {
+        if (window.isActive) return;
+
+        window.activate();
+    }
+//#END
 
     function pClose()
     {
@@ -520,6 +541,10 @@ Item
         tabs: core.tabs
 
         Component.onCompleted: core.applyHooks(player)
+
+//#DESKTOP
+        onSourceChanged: pActivate()
+//#END
     }
 
     Noise

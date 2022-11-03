@@ -111,6 +111,10 @@ Application
         onDoubleClicked: gui.toggleFullScreen()
 //#END
 
+//#DESKTOP
+        onAvailableGeometryChanged: local.screen = screenNumber()
+//#END
+
         Loader
         {
             id: loader

@@ -40,21 +40,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-            <!-- NOTE: Enable incoming URL. -->
-            <intent-filter>
-                <action   android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data     android:mimeType="*/*"/>
-            </intent-filter>
-            <!-- NOTE: Do we really need to support this ? -->
-            <intent-filter>
-                <action   android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data     android:mimeType="*/*"/>
-                <data     android:scheme="file"/>
-                <data     android:scheme="content"/>
-            </intent-filter>
-
             <meta-data android:name="android.app.lib_name"  android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
             <meta-data android:name="android.app.arguments" android:value="-- %%INSERT_APP_ARGUMENTS%% --"/>
 

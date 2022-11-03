@@ -67,6 +67,10 @@ public: // Variables
     QString name;
     QString version;
 
+#ifdef SK_DESKTOP
+    int screen;
+#endif
+
     bool vsync;
 
 #ifndef SK_NO_TORRENT
@@ -113,6 +117,10 @@ public: // Variables
 
     stream.writeTextElement("version", version);
 
+#ifdef SK_DESKTOP
+    stream.writeTextElement("screen", QString::number(screen));
+#endif
+
     stream.writeTextElement("vsync", QString::number(vsync));
 
 #ifndef SK_NO_TORRENT
@@ -143,6 +151,10 @@ public: // Variables
 
 /* explicit */ DataLocal::DataLocal(QObject * parent) : WLocalObject(parent)
 {
+#ifdef SK_DESKTOP
+    _screen = -1;
+#endif
+
 #ifdef QT_4
     _vsync = false;
 #else
@@ -205,6 +217,10 @@ public: // Variables
     action->name    = sk->name   ();
     action->version = sk->version();
 
+#ifdef SK_DESKTOP
+    action->screen = _screen;
+#endif
+
     action->vsync = _vsync;
 
 #ifndef SK_NO_TORRENT
@@ -246,6 +262,15 @@ bool DataLocal::extract(const QByteArray & array)
 
         return extract(content.toUtf8());
     }
+
+#ifdef SK_DESKTOP
+    //---------------------------------------------------------------------------------------------
+    // screen
+
+    if (WControllerXml::readNextStartElement(&stream, "screen") == false) return false;
+
+    _screen = WControllerXml::readNextInt(&stream);
+#endif
 
     //---------------------------------------------------------------------------------------------
     // vsync
@@ -305,6 +330,28 @@ bool DataLocal::extract(const QByteArray & array)
 
 //-------------------------------------------------------------------------------------------------
 // Properties
+//-------------------------------------------------------------------------------------------------
+
+#ifdef SK_DESKTOP
+
+int DataLocal::screen() const
+{
+    return _screen;
+}
+
+void DataLocal::setScreen(int index)
+{
+    if (_screen == index) return;
+
+    _screen = index;
+
+    emit screenChanged();
+
+    save();
+}
+
+#endif
+
 //-------------------------------------------------------------------------------------------------
 
 bool DataLocal::vsync() const

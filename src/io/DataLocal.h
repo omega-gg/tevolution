@@ -24,6 +24,10 @@ class DataLocal : public WLocalObject
 {
     Q_OBJECT
 
+#ifdef SK_DESKTOP
+    Q_PROPERTY(int screen READ screen WRITE setScreen NOTIFY screenChanged)
+#endif
+
     Q_PROPERTY(bool vsync READ vsync WRITE setVsync NOTIFY vsyncChanged)
 
 public:
@@ -41,6 +45,10 @@ private: // Functions
     bool extract(const QByteArray & array);
 
 signals:
+#ifdef SK_DESKTOP
+    void screenChanged();
+#endif
+
     void vsyncChanged();
 
 #ifndef SK_NO_TORRENT
@@ -57,6 +65,11 @@ signals:
     void broadcastPortChanged();
 
 public: // Properties
+#ifdef SK_DESKTOP
+    int  screen() const;
+    void setScreen(int index);
+#endif
+
     bool vsync() const;
     void setVsync(bool enabled);
 
@@ -82,6 +95,10 @@ public: // Properties
 
 private: // Variables
     QString _version;
+
+#ifdef SK_DESKTOP
+    int _screen;
+#endif
 
     bool _vsync;
 

@@ -119,6 +119,10 @@ ControllerCore::ControllerCore() : WController()
 
     _local.load(true);
 
+#ifdef SK_DESKTOP
+    sk->setDefaultScreen(_local._screen);
+#endif
+
     //---------------------------------------------------------------------------------------------
     // QML
     //---------------------------------------------------------------------------------------------
