@@ -3,6 +3,20 @@
 #--------------------------------------------------------------------------------------------------
 
 jobs:
+- job: win32_qt4
+  pool:
+    vmImage: "windows-latest"
+  steps:
+  - bash: |
+      sh environment.sh qt4
+      sh build.sh win32 all
+      cd deploy
+      7z a ../tevolution.zip *
+  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
+    artifact: tevolution-win32-qt4
+
+#--------------------------------------------------------------------------------------------------
+
 - job: win32_qt5
   pool:
     vmImage: "windows-latest"

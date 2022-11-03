@@ -29,6 +29,9 @@
 #include <WControllerMedia>
 #include <WControllerTorrent>
 #include <WBroadcastServer>
+#ifdef QT_4
+#include <WView>
+#endif
 #include <WViewResizer>
 #include <WViewDrag>
 #include <WWindow>
@@ -417,6 +420,11 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::sendMessage(const QString & source)
 {
+#ifdef QT_4
+    Q_UNUSED(source);
+
+    return;
+#else
     if (_server == NULL) return;
 
     QStringList parameters;
@@ -426,6 +434,7 @@ ControllerCore::ControllerCore() : WController()
     parameters.append("-1");
 
     emit _server->message(WBroadcastMessage(WBroadcastMessage::SOURCE, parameters));
+#endif
 }
 
 #endif

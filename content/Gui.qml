@@ -559,7 +559,9 @@ Item
 
         interval: st.noise_interval
 
+//#QT_NEW
         fillMode: Noise.PreserveAspectCrop
+//#END
 
         color: st.noise_color
 
@@ -694,7 +696,9 @@ Item
 
         source: (step > 1 && player.videoTag) ? "PageTag.qml" : ""
 
+//#QT_NEW
         asynchronous: true
+//#END
     }
 
     Subtitle
@@ -780,9 +784,11 @@ Item
 
         visible: (window.isEntered && window.idle == false)
 
+//#QT_NEW
         buttonMinimize.margins: st.dp10
         buttonMaximize.margins: st.dp10
         buttonClose   .margins: st.dp6
+//#END
 
         buttonMinimize.visible: (st.isTight == false)
         buttonMaximize.visible: buttonMinimize.visible
