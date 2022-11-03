@@ -17,6 +17,11 @@
 #ifndef CONTROLLERCORE_H
 #define CONTROLLERCORE_H
 
+#ifdef QT_4
+// Qt includes
+#include <QImage>
+#endif
+
 // Sk includes
 #include <WController>
 #ifndef SK_DEPLOY
