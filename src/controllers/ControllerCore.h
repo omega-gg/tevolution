@@ -45,6 +45,11 @@ class WBackendIndex;
 class WTabsTrack;
 class WDeclarativePlayer;
 
+#ifdef QT_6
+Q_MOC_INCLUDE("WBroadcastServer")
+Q_MOC_INCLUDE("WTabsTrack")
+#endif
+
 class ControllerCore : public WController
 {
     Q_OBJECT
