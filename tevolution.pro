@@ -219,6 +219,7 @@ OTHER_FILES += 3rdparty.sh \
                dist/doc/fr/shortcuts.md \
                dist/doc/fr/about.md \
                dist/changes/1.0.0.md \
+               dist/changes/1.1.0.md \
                dist/iOS/Info.plist \
                dist/iOS/LaunchScreen.storyboard \
                dist/iOS/Images.xcassets/Contents.json \
