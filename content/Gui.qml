@@ -543,6 +543,8 @@ Item
         Component.onCompleted: core.applyHooks(player)
 
 //#DESKTOP
+        onIsPlayingChanged: if (isPlaying) pActivate()
+
         onSourceChanged: pActivate()
 //#END
     }
