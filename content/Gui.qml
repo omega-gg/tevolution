@@ -667,7 +667,11 @@ Item
         {
             if (visible)
             {
-                loadSource(pCover);
+                if (pCover)
+                {
+                    loadSource(pCover);
+                }
+                else sourceDefault = st.picture_flag;
 
                 asynchronous = gui.asynchronous;
             }
