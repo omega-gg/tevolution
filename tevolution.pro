@@ -229,8 +229,10 @@ OTHER_FILES += 3rdparty.sh \
                dist/android/res/xml/paths.xml \
                dist/android/qt5/AndroidManifest.xml \
                dist/android/qt5/build.gradle \
+               dist/android/qt5/gradle/wrapper/gradle-wrapper.properties \
                dist/android/qt6/AndroidManifest.xml \
                dist/android/qt6/build.gradle \
+               dist/android/qt6/gradle/wrapper/gradle-wrapper.properties \
 
 ios {
     # NOTE iOS: This is required for MobileVLCKit.
@@ -257,5 +259,6 @@ ios {
     ANDROID_PACKAGE_SOURCE_DIR = $$ANDROID_PACKAGE
 
     DISTFILES += $$ANDROID_PACKAGE/AndroidManifest.xml \
-                 $$ANDROID_PACKAGE/build.gradle
+                 $$ANDROID_PACKAGE/build.gradle \
+                 $$ANDROID_PACKAGE/gradle/wrapper/gradle-wrapper.properties
 }

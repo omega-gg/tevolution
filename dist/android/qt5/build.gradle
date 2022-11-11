@@ -1,17 +1,17 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
     }
 }
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 apply plugin: 'com.android.application'
@@ -37,7 +37,7 @@ android {
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
-    buildToolsVersion '28.0.3'
+    buildToolsVersion androidBuildToolsVersion
 
     sourceSets {
         main {
@@ -74,5 +74,7 @@ android {
         resConfig "en"
         minSdkVersion = qtMinSdkVersion
         targetSdkVersion = qtTargetSdkVersion
+        // NOTE Qt5: This line was added manually to remove debug symbol(s).
+        ndk.debugSymbolLevel "none"
     }
 }
