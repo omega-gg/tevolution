@@ -10,11 +10,12 @@ Conçu pour traiter les requêtes de diffusion d'un Lecteur Sémantique.
 
 [omega] développe tevolution au service de l'utilisateur.
 
-#
 
-Je suis [bunjee] et j'ai commencé tevolution en 2022.
+# Support
 
-Je développe du logiciel innovant au service de l'homme.
+Documentation: [https://omega.gg/tevolution/documentation/fr](https://omega.gg/tevolution/documentation/fr)
+
+Bug tracker: [https://omega.gg/tevolution/tracker/fr](https://omega.gg/tevolution/tracker/fr)
 
 
 # Pages
@@ -81,11 +82,7 @@ Liberté Médiatique: [https://omega.gg/about/MotionFreedom/fr][Liberté Médiat
 
 ---
 
-bunjee: [https://bunjee.me/fr][bunjee]
-
 omega: [https://omega.gg/about/fr][omega]
-
-[bunjee]: https://bunjee.me/fr
 
 [omega]: https://omega.gg/about/fr
 

@@ -10,11 +10,12 @@ Designed to take streaming requests from a [Semantic Player].
 
 [omega] is building tevolution to empower people.
 
-#
 
-I am [bunjee] and started tevolution in 2022.
+# Support
 
-I'm building innovative software that empowers people.
+Documentation: [https://omega.gg/tevolution/documentation](https://omega.gg/tevolution/documentation)
+
+Bug tracker: [https://omega.gg/tevolution/tracker](https://omega.gg/tevolution/tracker)
 
 
 # Technology
@@ -76,11 +77,7 @@ Motion Freedom: [https://omega.gg/about/MotionFreedom][Motion Freedom]
 
 ---
 
-bunjee: [https://bunjee.me][bunjee]
-
 omega: [https://omega.gg/about][omega]
-
-[bunjee]: https://bunjee.me
 
 [omega]: https://omega.gg/about
 
