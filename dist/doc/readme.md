@@ -4,7 +4,7 @@
 
 #
 
-[tevolution] is a Remote Video Screen.
+[tevolution] is a [Remote Video Screen].
 
 Designed to take streaming requests from a [Semantic Player].
 
@@ -61,6 +61,8 @@ This page: [https://omega.gg/tevolution/get][page]
 ---
 
 tevolution: [https://omega.gg/tevolution][tevolution]
+
+Remote Video Screen: [https://omega.gg/about/RemoteVideoScreen][Remote Video Screen]
 
 Semantic Player: [https://omega.gg/about/SemanticPlayer][Semantic Player]
 

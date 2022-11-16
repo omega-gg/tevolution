@@ -4,7 +4,7 @@
 
 #
 
-[tevolution] est un Écran Vidéo Déporté.
+[tevolution] est un [Écran Vidéo Déporté].
 
 Conçu pour traiter les requêtes de diffusion d'un Lecteur Sémantique.
 
@@ -66,6 +66,8 @@ Cette page: [https://omega.gg/tevolution/get/fr][page]
 ---
 
 tevolution: [https://omega.gg/tevolution/fr][tevolution]
+
+Écran Vidéo Déporté: [https://omega.gg/about/RemoteVideoScreen/fr][Écran Vidéo Déporté]
 
 Lecteur Sémantique: [https://omega.gg/about/SemanticPlayer/fr][Lecteur Sémantique]
 
