@@ -549,6 +549,75 @@ Item
 //#END
     }
 
+    // FIXME: When resuming the player gets black right before starting.
+    //        So we make sure we have the cover in the foreground.
+    ImageScale
+    {
+        id: cover
+
+        anchors.fill: player
+
+        visible: (opacity != 0.0)
+        opacity: 0.0
+
+        source: pGetCover()
+
+        sourceDefault: st.picture_flag
+
+        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
+                                                                        : Image.PreserveAspectCrop
+
+        onLoaded: sourceDefault = st.picture_flag
+
+        // NOTE: When we switch from playback to the cover we want to avoid blinking on the
+        //       previous cover.
+        onVisibleChanged:
+        {
+            if (visible)
+            {
+                if (pCover)
+                {
+                    loadSource(pCover);
+                }
+                else sourceDefault = st.picture_flag;
+
+                asynchronous = gui.asynchronous;
+            }
+            else
+            {
+                // NOTE: Backuping the old cover to avoid setting it to 'pixmap' in clearPixmap.
+                var cover = pCover;
+
+                clearPixmap();
+
+                pCover = cover;
+
+                // NOTE: Clearing sourceDefault to avoid blinking on it when switching to visible.
+                sourceDefault = "";
+
+                // NOTE: Disabling asynchronous so we can load the cover as fast as possible before
+                //       it gets visible.
+                asynchronous = false;
+            }
+        }
+
+        onSourceChanged: pCover = source
+
+        Behavior on opacity
+        {
+            id: behaviorOpacity
+
+            enabled: false
+
+            PropertyAnimation
+            {
+                duration: pDuration
+
+                easing.type: st.easing
+            }
+        }
+    }
+
     Noise
     {
         id: noise
@@ -632,75 +701,6 @@ Item
 
         Behavior on opacity
         {
-            PropertyAnimation
-            {
-                duration: pDuration
-
-                easing.type: st.easing
-            }
-        }
-    }
-
-    // FIXME: When resuming the player gets black right before starting.
-    //        So we make sure we have the cover in the foreground.
-    ImageScale
-    {
-        id: cover
-
-        anchors.fill: player
-
-        visible: (opacity != 0.0)
-        opacity: 0.0
-
-        source: pGetCover()
-
-        sourceDefault: st.picture_flag
-
-        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
-                                                                        : Image.PreserveAspectCrop
-
-        onLoaded: sourceDefault = st.picture_flag
-
-        // NOTE: When we switch from playback to the cover we want to avoid blinking on the
-        //       previous cover.
-        onVisibleChanged:
-        {
-            if (visible)
-            {
-                if (pCover)
-                {
-                    loadSource(pCover);
-                }
-                else sourceDefault = st.picture_flag;
-
-                asynchronous = gui.asynchronous;
-            }
-            else
-            {
-                // NOTE: Backuping the old cover to avoid setting it to 'pixmap' in clearPixmap.
-                var cover = pCover;
-
-                clearPixmap();
-
-                pCover = cover;
-
-                // NOTE: Clearing sourceDefault to avoid blinking on it when switching to visible.
-                sourceDefault = "";
-
-                // NOTE: Disabling asynchronous so we can load the cover as fast as possible before
-                //       it gets visible.
-                asynchronous = false;
-            }
-        }
-
-        onSourceChanged: pCover = source
-
-        Behavior on opacity
-        {
-            id: behaviorOpacity
-
-            enabled: false
-
             PropertyAnimation
             {
                 duration: pDuration
