@@ -1,14 +1,14 @@
-# [tevolution] - alpha 1.0.0-0
+# [tévolution] - alpha 1.0.0-0
 
 ### [english](../../Readme.html) / français
 
 #
 
-[tevolution] est un [Écran Vidéo Déporté].
+[tévolution] est un [Écran Vidéo Déporté].
 
 Conçu pour traiter les requêtes de diffusion d'un Lecteur Sémantique.
 
-[omega] développe tevolution au service de l'utilisateur.
+[omega] développe tévolution au service de l'utilisateur.
 
 
 # Support
@@ -25,7 +25,7 @@ Raccourcis: [documents/fr/shortcuts.html](shortcuts.html)
 
 # Technologie
 
-tevolution est développé en C++ avec [Sky kit] et le [framework Qt].
+tévolution est développé en C++ avec [Sky kit] et le [framework Qt].
 
 L'interface est écrite [QML] et rendue avec OpenGL.
 
@@ -66,7 +66,7 @@ Cette page: [https://omega.gg/tevolution/get/fr][page]
 
 ---
 
-tevolution: [https://omega.gg/tevolution/fr][tevolution]
+tévolution: [https://omega.gg/tevolution/fr][tevolution]
 
 Écran Vidéo Déporté: [https://omega.gg/about/RemoteVideoScreen/fr][Écran Vidéo Déporté]
 
@@ -74,7 +74,7 @@ Lecteur Sémantique: [https://omega.gg/about/SemanticPlayer/fr][Lecteur Sémanti
 
 Liberté Médiatique: [https://omega.gg/about/MotionFreedom/fr][Liberté Médiatique]
 
-[tevolution]: https://omega.gg/tevolution/fr
+[tévolution]: https://omega.gg/tevolution/fr
 
 [Lecteur Sémantique]: https://omega.gg/about/SemanticPlayer/fr
 
