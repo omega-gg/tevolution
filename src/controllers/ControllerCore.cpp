@@ -407,6 +407,8 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::clearCache()
 {
+    if (_index) _index->clearCache();
+
     _cache->clearFiles();
 
 #ifndef SK_NO_TORRENT

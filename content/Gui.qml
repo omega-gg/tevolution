@@ -542,6 +542,8 @@ Item
 
         Component.onCompleted: core.applyHooks(player)
 
+        onClearCache: core.clearCache()
+
 //#DESKTOP
         onIsPlayingChanged: if (isPlaying) pActivate()
 
