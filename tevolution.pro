@@ -152,8 +152,8 @@ macx:LIBS += -L$$SK/lib -lvlc \
              -L$$SK/lib -ltorrent-rasterbar \
              -L$$SK/lib -lboost_system
 
+# NOTE iOS: MediaPlayer is required for MP* classes.
 ios:LIBS += -framework MobileVLCKit \
-            # NOTE iOS: MediaPlayer is required for MP* classes.
             -framework MediaPlayer
 
 unix:LIBS += -lz
