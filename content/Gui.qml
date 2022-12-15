@@ -558,8 +558,30 @@ Item
 
 //#DESKTOP
         onIsPlayingChanged: if (isPlaying) pActivate()
+//#END
 
-        onSourceChanged: pActivate()
+        onHasStartedChanged:
+        {
+            if (hasStarted) sk.showPlayback(currentTab.title, currentTab.author);
+            else            sk.hidePlayback();
+        }
+
+//#DESKTOP
+        onSourceChanged:
+        {
+            pActivate();
+
+            if (hasStarted == false) return;
+
+            sk.showPlayback(currentTab.title, currentTab.author);
+        }
+//#ELSE
+        onSourceChanged:
+        {
+            if (hasStarted == false) return;
+
+            sk.showPlayback(currentTab.title, currentTab.author);
+        }
 //#END
     }
 
