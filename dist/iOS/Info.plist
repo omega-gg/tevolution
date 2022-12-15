@@ -37,9 +37,9 @@
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <!-- NOTE iOS: Required for background audio. -->
-    <!-- <key>UIBackgroundModes</key>
+    <key>UIBackgroundModes</key>
     <array>
         <string>audio</string>
-    </array> -->
+    </array>
 </dict>
 </plist>

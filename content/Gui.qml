@@ -122,6 +122,18 @@ Item
 
     Connections
     {
+        target: sk
+
+        /* QML_CONNECTION */ function onPlaybackUpdated(status)
+        {
+            if      (status == Sk.Play)  player.play ();
+            else if (status == Sk.Pause) player.pause();
+            else                         player.stop ();
+        }
+    }
+
+    Connections
+    {
         target: core
 
         /* QML_CONNECTION */ function onTagSourceUpdated(image)
