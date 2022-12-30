@@ -131,7 +131,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
                    $$SK/include/$$QTX/QtQuick
 }
 
-unix:!macx:!android:greaterThan(QT_MAJOR_VERSION, 4) {
+unix:!macx:!ios:!android:greaterThan(QT_MAJOR_VERSION, 4) {
     INCLUDEPATH += $$SK/include/$$QTX/QtDBus
 }
 
@@ -148,9 +148,9 @@ win32:LIBS += -L$$SK/lib -ltorrent \
 # Windows dependency for ShellExecuteA and PostMessage
 win32-msvc*:LIBS += shell32.lib User32.lib
 
-macx:LIBS += -L$$SK/lib -lvlc \
-             -L$$SK/lib -ltorrent-rasterbar \
-             -L$$SK/lib -lboost_system
+unix:!ios:!android:LIBS += -L$$SK/lib -lvlc \
+                           -L$$SK/lib -ltorrent-rasterbar \
+                           -L$$SK/lib -lboost_system
 
 # NOTE iOS: MediaPlayer is required for MP* classes.
 ios:LIBS += -framework MobileVLCKit \
@@ -158,15 +158,11 @@ ios:LIBS += -framework MobileVLCKit \
 
 unix:LIBS += -lz
 
-unix:!macx:!ios:!android:LIBS += -lvlc \
-                                 -L$$SK/lib -ltorrent-rasterbar \
-                                 -L$$SK/lib -lboost_system
-
 android:LIBS += -L$$ANDROID_LIB -lvlc \
                 -L$$ANDROID_LIB -ltorrent-rasterbar \
                 -L$$ANDROID_LIB -ltry_signal
 
-unix:!macx:!android:contains(QT_MAJOR_VERSION, 4) {
+unix:!macx:!ios:!android:contains(QT_MAJOR_VERSION, 4) {
     LIBS += -lX11
 }
 

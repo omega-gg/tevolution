@@ -140,19 +140,15 @@ jobs:
 
 - job: linux64_qt5
   pool:
-    vmImage: "ubuntu-latest"
+    # NOTE: We need an older version to package the application.
+    vmImage: "ubuntu-18.04"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/tevolution amd64/ubuntu:20.04 tail -f /dev/null
-      docker exec -t ubuntu bash -c "cd /tevolution;
-                                     export DEBIAN_FRONTEND=noninteractive;
-                                     apt-get update;
-                                     apt-get -y install sudo curl zip git awscli;
-                                     sh build.sh linux all;
-                                     cd deploy;
-                                     zip -rq ../tevolution.zip *;
-                                     cd -;
-                                     sh upload.sh linux64"
+      sh build.sh linux all
+      cd deploy
+      zip -rq ../tevolution.zip *
+      cd -
+      sh upload.sh linux64
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-linux64-qt5
 
@@ -163,15 +159,10 @@ jobs:
 #    vmImage: "ubuntu-latest"
 #  steps:
 #  - bash: |
-#      docker run -d --name ubuntu -v $PWD:/tevolution amd64/ubuntu:20.04 tail -f /dev/null
-#      docker exec -t ubuntu bash -c "cd /tevolution;
-#                                     export DEBIAN_FRONTEND=noninteractive;
-#                                     apt-get update;
-#                                     apt-get -y install sudo curl zip git awscli;
-#                                     sh environment.sh qt6;
-#                                     sh build.sh linux all;
-#                                     cd deploy;
-#                                     zip -rq ../tevolution.zip *"
+#      sh environment.sh qt6
+#      sh build.sh linux all
+#      cd deploy
+#      zip -rq ../tevolution.zip *
 #  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #    artifact: tevolution-linux64-qt6
 
@@ -184,16 +175,11 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/tevolution amd64/ubuntu:20.04 tail -f /dev/null
-      docker exec -t ubuntu bash -c "cd /tevolution;
-                                     export DEBIAN_FRONTEND=noninteractive;
-                                     apt-get update;
-                                     apt-get -y install sudo curl zip unzip git awscli;
-                                     sh build.sh android all;
-                                     cd deploy;
-                                     zip -rq ../tevolution.zip *;
-                                     cd -;
-                                     sh upload.sh android"
+      sh build.sh android all
+      cd deploy
+      zip -rq ../tevolution.zip *
+      cd -
+      sh upload.sh android
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-android-qt5
 
@@ -202,14 +188,9 @@ jobs:
 #    vmImage: "ubuntu-latest"
 #  steps:
 #  - bash: |
-#      docker run -d --name ubuntu -v $PWD:/tevolution amd64/ubuntu:20.04 tail -f /dev/null
-#      docker exec -t ubuntu bash -c "cd /tevolution;
-#                                     export DEBIAN_FRONTEND=noninteractive;
-#                                     apt-get update;
-#                                     apt-get -y install sudo curl zip unzip git awscli;
-#                                     sh environment.sh qt6;
-#                                     sh build.sh android all;
-#                                     cd deploy;
-#                                     zip -rq ../tevolution.zip *"
+#      sh environment.sh qt6
+#      sh build.sh android all
+#      cd deploy
+#      zip -rq ../tevolution.zip *
 #  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #    artifact: tevolution-android-qt6
