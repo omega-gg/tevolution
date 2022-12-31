@@ -600,7 +600,7 @@ Item
 
         sourceDefault: st.picture_flag
 
-        fillMode: (st.isTight || (player.isStopped == false && pAudio)) ? Image.PreserveAspectFit
+        fillMode: (st.isTight || (pAudio && player.isStopped == false)) ? Image.PreserveAspectFit
                                                                         : Image.PreserveAspectCrop
 
         onLoaded: sourceDefault = st.picture_flag
