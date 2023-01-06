@@ -71,6 +71,8 @@ Motion Freedom: [https://omega.gg/about/MotionFreedom][Motion Freedom]
 
 [tevolution]: https://omega.gg/tevolution
 
+[Remote Video Screen]: https://omega.gg/about/RemoteVideoScreen
+
 [Semantic Player]: https://omega.gg/about/SemanticPlayer
 
 [Motion Freedom]: https://omega.gg/about/MotionFreedom

@@ -76,6 +76,8 @@ Liberté Médiatique: [https://omega.gg/about/MotionFreedom/fr][Liberté Médiat
 
 [tévolution]: https://omega.gg/tevolution/fr
 
+[Écran Vidéo Déporté]: https://omega.gg/about/RemoteVideoScreen/fr
+
 [Lecteur Sémantique]: https://omega.gg/about/SemanticPlayer/fr
 
 [Liberté Médiatique]: https://omega.gg/about/MotionFreedom/fr
