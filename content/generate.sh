@@ -353,6 +353,8 @@ if [ "$2" = "deploy" ]; then
     defines="$defines DEPLOY"
 fi
 
+defines="$defines pictures_tag"
+
 files="\
 $SkyBase/Style.qml \
 $SkyBase/WindowSky.qml \
