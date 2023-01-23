@@ -40,8 +40,8 @@ Item
     property bool pVersion: (online.version && online.version != sk.version)
 //#END
 
-    property int pSize: (st.isTight) ? height / 3
-                                     : height / 2
+    /* read */ property int size: (st.isTight) ? height / 3
+                                               : Math.min(width, height) / 2
 
     // NOTE: Margins are 56 pixels on a 512 tag.
     property int pSizeTag: pSize * 0.890625
@@ -600,8 +600,7 @@ Item
 
         sourceDefault: st.picture_flag
 
-        fillMode: (st.isTight || (pAudio && player.isStopped == false)) ? Image.PreserveAspectFit
-                                                                        : Image.PreserveAspectCrop
+        fillMode: Image.PreserveAspectFit
 
         onLoaded: sourceDefault = st.picture_flag
 
