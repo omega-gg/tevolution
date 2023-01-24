@@ -40,8 +40,8 @@ Item
     property bool pVersion: (online.version && online.version != sk.version)
 //#END
 
-    /* read */ property int size: (st.isTight) ? height / 3
-                                               : Math.min(width, height) / 2
+    property int pSize: (st.isTight) ? height / 3
+                                     : Math.min(width, height) / 2
 
     // NOTE: Margins are 56 pixels on a 512 tag.
     property int pSizeTag: pSize * 0.890625
