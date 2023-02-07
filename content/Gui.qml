@@ -600,7 +600,7 @@ Item
 
         sourceDefault: st.picture_flag
 
-        fillMode: Image.PreserveAspectFit
+        fillMode: player.fillMode
 
         onLoaded: sourceDefault = st.picture_flag
 
