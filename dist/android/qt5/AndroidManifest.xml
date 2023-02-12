@@ -17,6 +17,10 @@
          Remove the comment if you do not require these default features. -->
     <!-- %%INSERT_FEATURES -->
 
+    <!-- NOTE: This is required for Android TV -->
+    <uses-feature android:name="android.software.leanback"    android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+
     <supports-screens android:anyDensity="true"
                       android:smallScreens="true"
                       android:normalScreens="true"
@@ -26,7 +30,8 @@
                  android:label="-- %%INSERT_APP_NAME%% --"
                  android:extractNativeLibs="true"
                  android:hardwareAccelerated="true"
-                 android:icon="@drawable/icon">
+                 android:icon="@drawable/icon"
+                 android:banner="@drawable/banner">
 
         <!-- NOTE: We need singleInstance and an empty taskAffinity for sharing to work properly. -->
         <!-- NOTE: The 'exported' attribute is required for Android 12. -->
@@ -42,6 +47,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <!-- NOTE: This is required for Android TV -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
             </intent-filter>
 
             <!-- Application arguments -->

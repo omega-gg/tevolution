@@ -13,6 +13,10 @@
 
     <!-- %%INSERT_FEATURES -->
 
+    <!-- NOTE: This is required for Android TV -->
+    <uses-feature android:name="android.software.leanback"    android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+
     <supports-screens android:anyDensity="true"
                       android:smallScreens="true"
                       android:normalScreens="true"
@@ -24,7 +28,8 @@
                  android:hardwareAccelerated="true"
                  android:requestLegacyExternalStorage="true"
                  android:allowNativeHeapPointerTagging="false"
-                 android:icon="@drawable/icon">
+                 android:icon="@drawable/icon"
+                 android:banner="@drawable/banner">
 
         <!-- FIXME Qt5: We need singleInstance and an empty taskAffinity for sharing to work properly. -->
         <!-- NOTE: The 'exported' attribute is required for Android 12. -->
@@ -40,6 +45,8 @@
             <intent-filter>
                 <action   android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <!-- NOTE: This is required for Android TV -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
             </intent-filter>
 
             <meta-data android:name="android.app.lib_name"  android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
