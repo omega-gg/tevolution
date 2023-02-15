@@ -397,26 +397,26 @@ Item
 
         pLoadShotA();
 
-        pSaveShotB(path + "/MotionMonkey.jpg", 90);
+        pSaveShotB(path + "/tevolution.jpg", 90);
 
         st.ratio = 3.497;
 
         window.width  = 2560;
         window.height = 1440;
 
-        pSaveShotB(path + "/MotionMonkeyMobileA.jpg", -1);
+        pSaveShotB(path + "/tevolutionMobileA.jpg", -1);
 
         pLoadShotB();
 
-        pSaveShotB(path + "/MotionMonkeyMobileB.jpg", -1);
+        pSaveShotB(path + "/tevolutionMobileB.jpg", -1);
 
         pLoadShotC();
 
-        pSaveShotB(path + "/MotionMonkeyMobileC.jpg", -1);
+        pSaveShotB(path + "/tevolutionMobileC.jpg", -1);
 
         pLoadShotD();
 
-        pSaveShotB(path + "/MotionMonkeyMobileD.jpg", -1);
+        pSaveShotB(path + "/tevolutionMobileD.jpg", -1);
 
         window.compressShots(path);
 
