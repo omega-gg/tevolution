@@ -62,7 +62,7 @@ W_INIT_CONTROLLER(ControllerCore)
 //-------------------------------------------------------------------------------------------------
 // Static variables
 
-// NOTE: Also check CFBundleVersion and version_windows.
+// NOTE: Also check CFBundleVersion, version_code and version_windows.
 static const QString CORE_VERSION = "1.0.0-0";
 
 #ifndef SK_DEPLOY
