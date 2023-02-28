@@ -140,15 +140,20 @@ jobs:
 
 - job: linux64_qt5
   pool:
-    # NOTE: We need an older version to package the application.
-    vmImage: "ubuntu-18.04"
+    vmImage: "ubuntu-latest"
   steps:
+  # NOTE: We need an older version to package the application.
   - bash: |
-      sh build.sh linux all
-      cd deploy
-      zip -rq ../tevolution.zip *
-      cd -
-      sh upload.sh linux64
+      docker run -d --name ubuntu -v $PWD:/tevolution amd64/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /tevolution;
+                                     export DEBIAN_FRONTEND=noninteractive;
+                                     apt-get update;
+                                     apt-get -y install sudo curl zip git awscli;
+                                     sh build.sh linux all;
+                                     cd deploy;
+                                     zip -rq ../tevolution.zip *;
+                                     cd -;
+                                     sh upload.sh linux64"
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-linux64-qt5
 
