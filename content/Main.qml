@@ -47,6 +47,10 @@ Application
     {
         id: window
 
+//#DESKTOP
+        fullScreen: core.isFullScreen
+//#END
+
         vsync: local.vsync
 
         idleCheck: (gui != null)

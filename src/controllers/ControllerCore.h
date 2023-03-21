@@ -54,6 +54,10 @@ class ControllerCore : public WController
 {
     Q_OBJECT
 
+#ifdef SK_DESKTOP
+    Q_PROPERTY(bool isFullScreen READ isFullScreen CONSTANT)
+#endif
+
     Q_PROPERTY(WBroadcastServer * server READ server NOTIFY serverChanged)
 
     Q_PROPERTY(WTabsTrack * tabs READ tabs NOTIFY tabsChanged)
@@ -116,12 +120,18 @@ signals:
     void indexChanged();
 
 public: // Properties
+#ifdef SK_DESKTOP
+    bool isFullScreen() const;
+#endif
+
     WBroadcastServer * server();
 
     WTabsTrack * tabs() const;
 
 private: // Variables
 #ifdef SK_DESKTOP
+    bool _fullScreen;
+
     QString _argument;
 #endif
 

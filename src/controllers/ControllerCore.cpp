@@ -65,6 +65,8 @@ W_INIT_CONTROLLER(ControllerCore)
 // NOTE: Also check CFBundleVersion, version_code and version_windows.
 static const QString CORE_VERSION = "1.0.0-0";
 
+static const int CORE_CACHE = 1048576 * 100; // 100 megabytes
+
 #ifndef SK_DEPLOY
 #ifdef Q_OS_MAC
 static const QString PATH_STORAGE = "/../../../storage";
@@ -81,6 +83,10 @@ static const QString PATH_BACKEND = "../../backend";
 
 ControllerCore::ControllerCore() : WController()
 {
+#ifdef SK_DESKTOP
+    _fullScreen = false;
+#endif
+
     _online = NULL;
 
     _cache = NULL;
@@ -232,7 +238,18 @@ ControllerCore::ControllerCore() : WController()
 {
     if (argc < 2) return;
 
-    _argument = QString(argv[1]);
+    for (int i = 1; i < argc; i++)
+    {
+        QString string = argv[i];
+
+        if (string.startsWith("--"))
+        {
+            string = string.remove(0, 2).toLower();
+
+            if (string == "fullscreen") _fullScreen = true;
+        }
+        else _argument = string;
+    }
 }
 
 #endif
@@ -279,7 +296,7 @@ ControllerCore::ControllerCore() : WController()
     //---------------------------------------------------------------------------------------------
     // Cache
 
-    _cache = new WCache(_path + "/cache", 1048576 * 100); // 100 megabytes
+    _cache = new WCache(_path + "/cache", CORE_CACHE);
 
     wControllerFile->setCache(_cache);
 
@@ -560,10 +577,18 @@ void ControllerCore::onSource(const QString & source)
 
     generateSourceTag(source);
 }
-
 //-------------------------------------------------------------------------------------------------
 // Properties
 //-------------------------------------------------------------------------------------------------
+
+#ifdef SK_DESKTOP
+
+bool ControllerCore::isFullScreen() const
+{
+    return _fullScreen;
+}
+
+#endif
 
 WBroadcastServer * ControllerCore::server()
 {
