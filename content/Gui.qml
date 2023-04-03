@@ -37,7 +37,8 @@ Item
     // Private
 
 //#!MOBILE
-    property bool pVersion: (online.version && online.version != sk.version)
+    // NOTE: The update button is only visible on the landing page.
+    property bool pVersion: (step == 0 && online.version && online.version != sk.version)
 //#END
 
     property int pSize: (st.isTight) ? height / 3
