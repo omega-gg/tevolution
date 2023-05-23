@@ -181,9 +181,9 @@ ControllerCore::ControllerCore() : WController()
     //---------------------------------------------------------------------------------------------
     // Declarative
 
-    qmlRegisterType<WDeclarativeBorders>("Sky", 1,0, "Borders");
-
     qmlRegisterType<WDeclarativeMouseArea>("Sky", 1,0, "MouseArea");
+
+    qmlRegisterType<WDeclarativeBorders>("Sky", 1,0, "Borders");
 
     qmlRegisterType<WDeclarativeGradient>    ("Sky", 1,0, "ScaleGradient");
     qmlRegisterType<WDeclarativeGradientStop>("Sky", 1,0, "ScaleGradientStop");
