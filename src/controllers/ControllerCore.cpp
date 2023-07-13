@@ -575,8 +575,24 @@ void ControllerCore::onSource(const QString & source)
 {
     qDebug("Server source: %s", source.C_STR);
 
+    QString string = Sk::sliceIn(source, "connect/", ":");
+
+    QStringList list = string.split('.');
+
+    _number.clear();
+
+    foreach (const QString & string, list)
+    {
+        _number.append(QString::number(string.toInt() + 100) + ' ');
+    }
+
+    if (_number.count()) _number.chop(1);
+
     generateSourceTag(source);
+
+    emit numberChanged();
 }
+
 //-------------------------------------------------------------------------------------------------
 // Properties
 //-------------------------------------------------------------------------------------------------
@@ -598,4 +614,9 @@ WBroadcastServer * ControllerCore::server()
 WTabsTrack * ControllerCore::tabs() const
 {
     return _tabs;
+}
+
+QString ControllerCore::number() const
+{
+    return _number;
 }

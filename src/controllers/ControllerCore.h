@@ -62,6 +62,8 @@ class ControllerCore : public WController
 
     Q_PROPERTY(WTabsTrack * tabs READ tabs NOTIFY tabsChanged)
 
+    Q_PROPERTY(QString number READ number NOTIFY numberChanged)
+
 private:
     ControllerCore();
 
@@ -119,6 +121,8 @@ signals:
 
     void indexChanged();
 
+    void numberChanged();
+
 public: // Properties
 #ifdef SK_DESKTOP
     bool isFullScreen() const;
@@ -127,6 +131,8 @@ public: // Properties
     WBroadcastServer * server();
 
     WTabsTrack * tabs() const;
+
+    QString number() const;
 
 private: // Variables
 #ifdef SK_DESKTOP
@@ -147,6 +153,8 @@ private: // Variables
     WTabsTrack * _tabs;
 
     WBackendIndex * _index;
+
+    QString _number;
 
 #ifndef SK_DEPLOY
     WFileWatcher _watcher;

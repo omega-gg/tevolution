@@ -33,6 +33,22 @@ Item
 
     /* read */ property variant currentTab: core.tabs.currentTab
 
+    property int size: (st.isTight) ? height / 3
+                                    : Math.min(width, height) / 2
+
+    // NOTE: Margins are 56 pixels on a 512 tag.
+    property int sizeTag: size * 0.890625
+
+    property variant tagImage: null
+
+    // NOTE: This is useful to keep the tag visible during the opacity animation.
+    property bool tagVisible: false
+
+    //---------------------------------------------------------------------------------------------
+    // Style
+
+    /* read */ property int durationAnimation: st.ms1000
+
     //---------------------------------------------------------------------------------------------
     // Private
 
@@ -40,12 +56,6 @@ Item
     // NOTE: The update button is only visible on the landing page.
     property bool pVersion: (step == 0 && online.version && online.version != sk.version)
 //#END
-
-    property int pSize: (st.isTight) ? height / 3
-                                     : Math.min(width, height) / 2
-
-    // NOTE: Margins are 56 pixels on a 512 tag.
-    property int pSizeTag: pSize * 0.890625
 
     property int pSizeLoader: height / 128
 
@@ -60,11 +70,6 @@ Item
     property string pCover: ""
 
     property int pStep: -1
-
-    //---------------------------------------------------------------------------------------------
-    // Style
-
-    property int pDuration: st.ms1000
 
     //---------------------------------------------------------------------------------------------
     // Settings
@@ -130,16 +135,6 @@ Item
             if      (status == Sk.Play)  player.play ();
             else if (status == Sk.Pause) player.pause();
             else                         player.stop ();
-        }
-    }
-
-    Connections
-    {
-        target: core
-
-        /* QML_CONNECTION */ function onTagSourceUpdated(image)
-        {
-            imageTag.applyImage(image);
         }
     }
 
@@ -532,7 +527,7 @@ Item
         {
             PropertyAnimation
             {
-                duration: pDuration
+                duration: durationAnimation
 
                 easing.type: st.easing
             }
@@ -647,7 +642,7 @@ Item
 
             PropertyAnimation
             {
-                duration: pDuration
+                duration: durationAnimation
 
                 easing.type: st.easing
             }
@@ -676,7 +671,7 @@ Item
         {
             PropertyAnimation
             {
-                duration: pDuration
+                duration: durationAnimation
 
                 easing.type: st.easing
             }
@@ -701,49 +696,22 @@ Item
         {
             PropertyAnimation
             {
-                duration: pDuration
+                duration: durationAnimation
 
                 easing.type: st.easing
             }
         }
     }
 
-    ImageScale
+    Loader
     {
-        anchors.centerIn: parent
+        anchors.fill: parent
 
-        width : pSize
-        height: width
+        source: (step < 2 || tagVisible) ? "PageConnect.qml" : ""
 
-        visible: (opacity != 0.0)
-
-        opacity: (step < 2) ? 1.0 : 0.0
-
-        source: st.picture_tag
-
+//#QT_NEW
         asynchronous: true
-
-        Image
-        {
-            id: imageTag
-
-            anchors.centerIn: parent
-
-            width : pSizeTag
-            height: pSizeTag
-
-            smooth: false
-        }
-
-        Behavior on opacity
-        {
-            PropertyAnimation
-            {
-                duration: pDuration
-
-                easing.type: st.easing
-            }
-        }
+//#END
     }
 
     Loader

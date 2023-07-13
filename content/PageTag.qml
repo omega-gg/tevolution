@@ -159,7 +159,7 @@ Item
     {
         anchors.centerIn: parent
 
-        width : gui.pSize
+        width : gui.size
         height: width
 
         source: st.picture_tag
@@ -173,8 +173,8 @@ Item
 
         anchors.centerIn: parent
 
-        width : gui.pSizeTag
-        height: gui.pSizeTag
+        width : gui.sizeTag
+        height: gui.sizeTag
 
         smooth: false
     }

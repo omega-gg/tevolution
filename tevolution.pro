@@ -205,6 +205,7 @@ OTHER_FILES += 3rdparty.sh \
                content/Main.qml \
                content/StyleApplication.qml \
                content/Gui.qml \
+               content/PageConnect.qml \
                content/PageTag.qml \
                include/generate.sh \
                dist/tevolution.rc \
