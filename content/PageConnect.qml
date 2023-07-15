@@ -112,19 +112,16 @@ Item
         }
     }
 
-    MagicNumber
+    CodeNumber
     {
         anchors.top: itemTag.bottom
 
-        anchors.topMargin: Math.round(itemTag.height / 6)
+        anchors.topMargin: Math.round(itemTag.height / 9)
 
         anchors.horizontalCenter: parent.horizontalCenter
 
         pixelSize: parent.height / 20
 
         text: core.number
-
-        color: (step) ? "#f0f0f0"
-                      : "#dcdcdc"
     }
 }
