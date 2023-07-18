@@ -425,6 +425,8 @@ Item
     {
         core.generateSourceTag("https://omega.gg/tevolution");
 
+        loaderConnect.item.codeNumber.text = "123 123 123 123";
+
         // NOTE: Wait for the VideoTag to load.
         sk.wait(2000);
     }
@@ -705,6 +707,10 @@ Item
 
     Loader
     {
+//#!DEPLOY
+        id: loaderConnect
+//#END
+
         anchors.fill: parent
 
         source: (step < 2 || tagVisible) ? "PageConnect.qml" : ""
