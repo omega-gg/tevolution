@@ -132,7 +132,7 @@ Item
 
         anchors.horizontalCenter: parent.horizontalCenter
 
-        pixelSize: parent.height / 20
+        pixelSize: gui.size / 10
 
         text: core.number
     }
