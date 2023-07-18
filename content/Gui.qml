@@ -322,6 +322,9 @@ Item
 
         st.ratio = 2.0;
 
+        // NOTE desktop: We want to avoid the black bars on the cover.
+        cover.fillMode = AbstractBackend.PreserveAspectCrop;
+
         var path = "../dist/screens";
 
         pLoadShotA();
