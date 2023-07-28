@@ -96,7 +96,7 @@ public: // Static functions
                                                 int upload, int download, int cache);
 #endif
 
-    Q_INVOKABLE static void applyHooks(WDeclarativePlayer * player);
+    Q_INVOKABLE static void applyBackend(WDeclarativePlayer * player);
 
 private: // Functions
     void createIndex();
