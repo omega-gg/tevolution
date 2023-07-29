@@ -365,6 +365,7 @@ $SkyBase/BaseButton.qml \
 $SkyBase/Subtitle.qml \
 $SkyBase/AnimatedSlide.qml \
 $SkyBase/AnimatedSlideImage.qml \
+$SkyBase/AnimatedLoader.qml \
 $SkyBase/CodeNumber.qml \
 $SkyTouch/StyleTouch.qml \
 $SkyTouch/BaseButtonTouch.qml \

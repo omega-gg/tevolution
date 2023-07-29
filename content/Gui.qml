@@ -683,29 +683,15 @@ Item
         }
     }
 
-    AnimatedSlideImage
+    AnimatedLoader
     {
         id: flag
 
         anchors.fill: parent
 
-        visible: (opacity != 0.0)
-
         opacity: (step == 1) ? 1.0 : 0.0
 
-        source: st.picture_flag
-
-        smooth: false
-
-        Behavior on opacity
-        {
-            PropertyAnimation
-            {
-                duration: durationAnimation
-
-                easing.type: st.easing
-            }
-        }
+        durationAnimation: gui.durationAnimation
     }
 
     Loader
@@ -744,7 +730,7 @@ Item
         }
     }
 
-    AnimatedSlideImage
+    AnimatedLoader
     {
 //#!DEPLOY
         id: itemLoading
@@ -756,25 +742,12 @@ Item
 
         height: pSizeLoader
 
-        visible: (opacity != 0.0)
-
         opacity: (player.isPlaying && player.isLoading
                   &&
                   // FIXME: When buffering we remove the animations on hub(s). To avoid the overlay
                   //        while restarting the video.
-                  (player.isBuffering == false || player.trackType != Playlist.TrackHub)) ? 0.8 : 0.0
-
-        source: st.picture_flag
-
-        Behavior on opacity
-        {
-            PropertyAnimation
-            {
-                duration: st.duration_faster
-
-                easing.type: st.easing
-            }
-        }
+                  (player.isBuffering == false || player.trackType != Playlist.TrackHub)) ? 0.8
+                                                                                          : 0.0
     }
 
     ButtonTouchIcon
