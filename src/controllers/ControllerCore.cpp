@@ -213,6 +213,8 @@ ControllerCore::ControllerCore() : WController()
     qmlRegisterUncreatableType<WAbstractHook>("Sky", 1,0, "AbstractHook",
                                               "AbstractHook is abstract");
 
+    qmlRegisterType<WPlaylist>("Sky", 1,0, "Playlist");
+
     qmlRegisterType<WTabsTrack>("Sky", 1,0, "TabsTrack");
     qmlRegisterType<WTabTrack> ("Sky", 1,0, "TabTrack");
 

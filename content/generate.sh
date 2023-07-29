@@ -147,7 +147,6 @@ if [ "$2" = "clean" ]; then
     echo "CLEANING"
 
     rm -f  $bin/*.qml
-    rm -rf $bin/pictures
     rm -rf $bin/icons
 
     rm -rf qrc
@@ -193,10 +192,6 @@ if [ $os = "mobile" -o "$2" = "all" -o "$2" = "deploy" ]; then
 
         cp -r "$Sky"/deploy/shaders $path
     fi
-
-    echo "COPYING pictures"
-
-    cp -r $content/pictures $path
 
     echo "COPYING icons"
 
