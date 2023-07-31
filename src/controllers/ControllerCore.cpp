@@ -490,13 +490,13 @@ ControllerCore::ControllerCore() : WController()
 
 #ifdef SK_NO_TORRENT
     return;
-#endif
-
+#else
     QList<WAbstractHook *> list;
 
     list.append(new WHookTorrent(backend));
 
     player->setHooks(list);
+#endif
 }
 
 //-------------------------------------------------------------------------------------------------
