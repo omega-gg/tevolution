@@ -434,6 +434,9 @@ ControllerCore::ControllerCore() : WController()
 #ifndef SK_NO_TORRENT
     wControllerTorrent->clearTorrents();
 #endif
+
+    // NOTE: It's important to reset backends in case they got corrupted.
+    resetBackends();
 }
 
 //-------------------------------------------------------------------------------------------------
