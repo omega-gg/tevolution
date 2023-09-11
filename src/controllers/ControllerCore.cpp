@@ -42,7 +42,7 @@
 #include <WTabsTrack>
 #include <WTabTrack>
 #include <WBackendIndex>
-#include <WBackendVlc>
+#include <WBackendTorrent>
 #include <WBackendSubtitle>
 #include <WImageFilterColor>
 #include <WImageFilterMask>
@@ -218,7 +218,6 @@ ControllerCore::ControllerCore() : WController()
     qmlRegisterType<WTabsTrack>("Sky", 1,0, "TabsTrack");
     qmlRegisterType<WTabTrack> ("Sky", 1,0, "TabTrack");
 
-    qmlRegisterType<WBackendVlc>     ("Sky", 1,0, "BackendVlc");
     qmlRegisterType<WBackendSubtitle>("Sky", 1,0, "BackendSubtitle");
 
     //---------------------------------------------------------------------------------------------
@@ -487,19 +486,13 @@ ControllerCore::ControllerCore() : WController()
 {
     Q_ASSERT(player);
 
-    WBackendVlc * backend = new WBackendVlc;
+#ifdef SK_NO_TORRENT
+    WBackendManager * backend = new WBackendManager;
+#else
+    WBackendTorrent * backend = new WBackendTorrent;
+#endif
 
     player->setBackend(backend);
-
-#ifdef SK_NO_TORRENT
-    return;
-#else
-    QList<WAbstractHook *> list;
-
-    list.append(new WHookTorrent(backend));
-
-    player->setHooks(list);
-#endif
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -97,6 +97,8 @@ Item
 
     Component.onCompleted:
     {
+        core.applyBackend(player);
+
         opacity = 1.0;
 
         core.generateSource();
@@ -547,13 +549,9 @@ Item
 
         visible: hasStarted
 
-        backend: BackendVlc {}
-
         server: gui.server
 
         tabs: core.tabs
-
-        Component.onCompleted: core.applyHooks(player)
 
         onClearCache: core.clearCache()
 
