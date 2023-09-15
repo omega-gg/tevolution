@@ -601,6 +601,8 @@ Item
 
         fillMode: player.fillMode
 
+        cache: false
+
         onLoaded: sourceDefault = st.picture_flag
 
         // NOTE: When we switch from playback to the cover we want to avoid blinking on the
