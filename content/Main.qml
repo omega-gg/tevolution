@@ -84,10 +84,7 @@ Application
         }
 //#END
 
-        /* QML_EVENT */ onMessageReceived: function(message)
-        {
-            gui.onMessageReceived(message)
-        }
+        /* QML_EVENT */ onMessageReceived: function(message) { gui.onMessageReceived(message) }
 
         /* QML_EVENT */ onKeyPressed : function(event) { gui.onKeyPressed (event) }
         /* QML_EVENT */ onKeyReleased: function(event) { gui.onKeyReleased(event) }
