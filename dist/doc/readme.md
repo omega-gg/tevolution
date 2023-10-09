@@ -4,7 +4,7 @@
 
 #
 
-[tevolution] is a [Remote Video Screen].
+[tevolution] is a [Remote Video Screen] built for [Motion Freedom].
 
 Designed to take streaming requests from a [Semantic Player].
 

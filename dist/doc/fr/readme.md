@@ -4,7 +4,7 @@
 
 #
 
-[tévolution] est un [Écran Vidéo Déporté].
+[tévolution] est un [Écran Vidéo Déporté] pensé pour la [Liberté Médiatique].
 
 Conçu pour traiter les requêtes de diffusion d'un Lecteur Sémantique.
 
