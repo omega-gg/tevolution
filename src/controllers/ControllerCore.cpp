@@ -407,7 +407,7 @@ ControllerCore::ControllerCore() : WController()
 {
     if (vbml.isEmpty()) return;
 
-    WBarcodeWriter::startWrite(vbml, this, SIGNAL(tagUpdated(const QImage &)),
+    WBarcodeWriter::startWrite(vbml, this, SIGNAL(tagUpdated(const QImage &, const QString &)),
                                WBarcodeWriter::Vbml, prefix);
 }
 
@@ -419,7 +419,8 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::generateSourceTag(const QString & text)
 {
-    WBarcodeWriter::startWrite(text, this, SIGNAL(tagSourceUpdated(const QImage &)));
+    WBarcodeWriter::startWrite(text, this,
+                               SIGNAL(tagSourceUpdated(const QImage &, const QString &)));
 }
 
 //-------------------------------------------------------------------------------------------------

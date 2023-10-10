@@ -112,8 +112,8 @@ private slots:
     void onSource(const QString & source);
 
 signals:
-    void tagUpdated      (const QImage & image);
-    void tagSourceUpdated(const QImage & image);
+    void tagUpdated      (const QImage & image, const QString & text);
+    void tagSourceUpdated(const QImage & image, const QString & text);
 
     void serverChanged();
 

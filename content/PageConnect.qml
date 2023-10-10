@@ -57,7 +57,7 @@ Item
     {
         target: core
 
-        /* QML_CONNECTION */ function onTagSourceUpdated(image)
+        /* QML_CONNECTION */ function onTagSourceUpdated(image, text)
         {
             tagImage = image;
 

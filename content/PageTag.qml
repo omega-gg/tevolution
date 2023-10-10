@@ -48,7 +48,7 @@ Item
     {
         target: core
 
-        /* QML_CONNECTION */ function onTagUpdated(image)
+        /* QML_CONNECTION */ function onTagUpdated(image, text)
         {
             imageTag.applyImage(image);
 
