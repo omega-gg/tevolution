@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath 'com.android.tools.build:gradle:7.4.1'
     }
 }
 
@@ -35,10 +35,8 @@ android {
      * Changing them manually might break the compilation!
      *******************************************************/
 
-    compileSdkVersion androidCompileSdkVersion.toInteger()
-
+    compileSdkVersion androidCompileSdkVersion
     buildToolsVersion androidBuildToolsVersion
-
     ndkVersion androidNdkVersion
 
     sourceSets {
@@ -74,8 +72,8 @@ android {
 
     defaultConfig {
         resConfig "en"
-        minSdkVersion qtMinSdkVersion
-        targetSdkVersion qtTargetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 33
         ndk.abiFilters = qtTargetAbiList.split(",")
     }
 
