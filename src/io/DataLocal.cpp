@@ -165,8 +165,8 @@ public: // Variables
 #ifndef SK_NO_TORRENT
     _torrentPort = DATALOCAL_PORT;
 
-    // FIXME: Let's try 200 because why not ?
-    _torrentConnections = 200;
+    // FIXME: Let's try 400 because why not ?
+    _torrentConnections = 400;
 
     _torrentUpload   = 0;
     _torrentDownload = 0;
