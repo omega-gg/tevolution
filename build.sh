@@ -9,6 +9,8 @@ target="tevolution"
 
 external="$PWD/../3rdparty"
 
+Sky="$PWD/../Sky"
+
 #--------------------------------------------------------------------------------------------------
 
 Qt4_version="4.8.7"
@@ -163,7 +165,7 @@ if [ "$2" = "all" ]; then
 
     sh configure.sh $1 sky
 
-    cd ../Sky
+    cd "$Sky"
 
     sh build.sh $1 tools
 
@@ -350,6 +352,9 @@ elif [ $1 = "android" ]; then
     export ANDROID_NDK_ROOT="$external/NDK/$NDK_version"
 
     export ANDROID_NDK_PLATFORM="android-$SDK_version"
+
+    # NOTE android: This variable enforces the linux clang compiler.
+    export ANDROID_NDK_HOST="linux-x86_64"
 fi
 
 $qmake --version
@@ -388,7 +393,7 @@ if [ $1 = "iOS" ]; then
 
         # NOTE iOS: Replacing WorkspaceSettings with a proper one. Otherwise the legacy build
         #           system stops the compilation.
-        cp ../../Sky/dist/iOS/WorkspaceSettings.xcsettings \
+        cp "$Sky"/dist/iOS/WorkspaceSettings.xcsettings \
            $target.xcodeproj/project.xcworkspace/xcshareddata
     fi
 
@@ -433,9 +438,15 @@ elif [ $1 = "iOS" ]; then
 elif [ $1 = "android" ]; then
 
     #----------------------------------------------------------------------------------------------
-    # FIXME Qt android: We have to call androiddeployqt to generate a release apk.
+    # FIXME android/Qt: We have to call androiddeployqt to generate a release apk.
 
-    androiddeployqt="$QtBin/androiddeployqt"
+    if [ $qt = "qt5" ]; then
+
+        # NOTE android/Qt5: We use a custom androiddeployqt that supports the latest NDK.
+        androiddeployqt="$Sky/deploy/androiddeployqt"
+    else
+        androiddeployqt="$QtBin/androiddeployqt"
+    fi
 
     deployAndroid armeabi-v7a
     deployAndroid arm64-v8a
