@@ -750,10 +750,13 @@ Item
         margins: st.dp8
 
 //#MOBILE
-        // NOTE mobile: For now, updates are handled through the stores.
-        visible: false
+            // NOTE mobile: Updates are handled by the stores.
+            visible: false
+//#ELIF WINDOWS
+            // NOTE windows/uwp: Updates are handled by the store.
+            visible: (sk.isUwp == false && pVersion)
 //#ELSE
-        visible: pVersion
+            visible: pVersion
 //#END
 
         highlighted: isFocused
