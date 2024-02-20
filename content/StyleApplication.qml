@@ -24,7 +24,7 @@ StyleTouch
     //---------------------------------------------------------------------------------------------
     // Noise
 
-    property int noise_interval: ms(16)
+    property int noise_interval: ms(20)
 
     property color noise_color: "#b4b4b4"
 
