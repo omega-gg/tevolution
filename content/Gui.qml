@@ -547,7 +547,7 @@ Item
 
         anchors.fill: parent
 
-        visible: (hasStarted && pAudio == false)
+        visible: (hasStarted && pCoverActive == false)
 
         server: gui.server
 
