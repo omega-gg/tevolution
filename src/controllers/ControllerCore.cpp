@@ -314,6 +314,12 @@ ControllerCore::ControllerCore() : WController()
 
     wControllerPlaylist->registerLoader(WBackendNetQuery::TypeTorrent, loaderTorrent);
     wControllerTorrent ->registerLoader(WBackendNetQuery::TypeTorrent, loaderTorrent);
+
+    //---------------------------------------------------------------------------------------------
+    // Torrents
+
+    applyTorrentOptions(_local._torrentConnections,
+                        _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
 #endif
 
     //---------------------------------------------------------------------------------------------
@@ -324,14 +330,6 @@ ControllerCore::ControllerCore() : WController()
     _server->start();
 
     emit serverChanged();
-
-#ifndef SK_NO_TORRENT
-    //---------------------------------------------------------------------------------------------
-    // Torrents
-
-    applyTorrentOptions(_local._torrentConnections,
-                        _local._torrentUpload, _local._torrentDownload, _local._torrentCache);
-#endif
 
     //---------------------------------------------------------------------------------------------
     // Tabs
