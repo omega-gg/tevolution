@@ -47,7 +47,7 @@ Item
     //---------------------------------------------------------------------------------------------
     // Style
 
-    /* read */ property int durationAnimation: st.ms1000
+    /* read */ property int durationAnimation: st.duration_normal
 
     //---------------------------------------------------------------------------------------------
     // Private
@@ -597,13 +597,9 @@ Item
 
         source: pGetCover()
 
-        sourceDefault: st.picture_flag
-
         fillMode: player.fillMode
 
         cache: false
-
-        onLoaded: sourceDefault = st.picture_flag
 
         // NOTE: When we switch from playback to the cover we want to avoid blinking on the
         //       previous cover.
@@ -611,11 +607,7 @@ Item
         {
             if (visible)
             {
-                if (pCover)
-                {
-                    loadSource(pCover);
-                }
-                else sourceDefault = st.picture_flag;
+                if (pCover) loadSource(pCover);
 
                 asynchronous = gui.asynchronous;
             }
@@ -627,9 +619,6 @@ Item
                 clearPixmap();
 
                 pCover = cover;
-
-                // NOTE: Clearing sourceDefault to avoid blinking on it when switching to visible.
-                sourceDefault = "";
 
                 // NOTE: Disabling asynchronous so we can load the cover as fast as possible before
                 //       it gets visible.
