@@ -63,7 +63,7 @@ jobs:
 
 - job: macOS_qt5
   pool:
-    vmImage: "macOS-11"
+    vmImage: "macOS-12"
   steps:
   - bash: |
       sh build.sh macOS all
@@ -76,7 +76,7 @@ jobs:
 
 #- job: macOS_qt6
 #  pool:
-#    vmImage: "macOS-11"
+#    vmImage: "macOS-12"
 #  steps:
 #  - bash: |
 #      sh environment.sh qt6
@@ -93,7 +93,7 @@ jobs:
 - job: iOS_qt5
   pool:
     # NOTE: macOS Big sur is required for iOS.
-    vmImage: "macOS-11"
+    vmImage: "macOS-12"
   steps:
   - bash: |
       sh build.sh iOS all
@@ -105,7 +105,7 @@ jobs:
 #- job: iOS_qt6
 #  pool:
 #    # NOTE: macOS Big sur is required for iOS.
-#    vmImage: "macOS-11"
+#    vmImage: "macOS-12"
 #  steps:
 #  - bash: |
 #      sh environment.sh qt6
