@@ -63,7 +63,7 @@ W_INIT_CONTROLLER(ControllerCore)
 // Static variables
 
 // NOTE: Also check DataLocal_patch, version_windows, version_code and CFBundleVersion.
-static const QString CORE_VERSION = "1.0.0-5";
+static const QString CORE_VERSION = "1.0.0-6";
 
 static const int CORE_CACHE = 1048576 * 100; // 100 megabytes
 
