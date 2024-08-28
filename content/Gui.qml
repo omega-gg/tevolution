@@ -651,7 +651,7 @@ Item
 
         visible: (opacity != 0.0)
 
-        opacity: (step == 0) ? 0.8 : 0.0
+        opacity: (step == 0) ? 0.6 : 0.0
 
         interval: st.noise_interval
 
