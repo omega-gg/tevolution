@@ -43,6 +43,7 @@
 #include <WTabTrack>
 #include <WBackendIndex>
 #include <WBackendTorrent>
+#include <WBackendUniversal>
 #include <WBackendSubtitle>
 #include <WImageFilterColor>
 #include <WImageFilterMask>
@@ -562,6 +563,8 @@ void ControllerCore::onReload()
     _index->reload();
 
     _index->reloadBackends();
+
+    WBackendUniversal::clearCache();
 }
 
 //-------------------------------------------------------------------------------------------------
