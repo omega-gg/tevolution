@@ -204,6 +204,7 @@ if [ $os = "windows" ]; then
             cp "$path/$QtX"WinExtras.dll   $deploy
         else
             cp "$path/$QtX"Core5Compat.dll $deploy
+            cp "$path/$QtX"QmlMeta.dll     $deploy
         fi
 
         if [ -f "$path/$QtX"QmlModels.dll ]; then
@@ -270,6 +271,7 @@ elif [ $1 = "macOS" ]; then
             cp "$path"/QtXmlPatterns.dylib $deploy
         else
             cp "$path"/QtCore5Compat.dylib $deploy
+            cp "$path"/QtQmlMeta.dylib     $deploy
         fi
 
         if [ -f "$path"/QtQmlModels.dylib ]; then
@@ -368,6 +370,7 @@ elif [ $1 = "linux" ]; then
             cp "$path/lib$QtX"XmlPatterns.so.$qx $deploy
         else
             cp "$path/lib$QtX"Core5Compat.so.$qx $deploy
+            cp "$path/lib$QtX"QmlMeta.so.$qx     $deploy
         fi
 
         if [ -f "$path/lib$QtX"QmlModels.so.$qx ]; then
@@ -542,6 +545,9 @@ elif [ $1 = "macOS" ]; then
 
         install_name_tool -change @rpath/QtQmlWorkerScript.framework/Versions/$qx/QtQmlWorkerScript \
                                   @loader_path/QtQmlWorkerScript.dylib $target
+
+        install_name_tool -change @rpath/QtQmlMeta.framework/Versions/$qx/QtQmlMeta \
+                                  @loader_path/QtQmlMeta.dylib $target
     fi
 
     otool -L $target
