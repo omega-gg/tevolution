@@ -220,7 +220,8 @@ if [ $os = "windows" ]; then
 
         if [ $qt = "qt6" ]; then
 
-            cp "$path"/tls/qopensslbackend.dll $deploy/tls
+            cp "$path"/tls/qopensslbackend.dll  $deploy/tls
+            cp "$path"/tls/qschannelbackend.dll $deploy/tls
         fi
 
         cp "$path"/$QtQuick/qtquick2plugin.dll $deploy/$QtQuick
@@ -538,6 +539,9 @@ elif [ $1 = "macOS" ]; then
     else
         install_name_tool -change @rpath/QtCore5Compat.framework/Versions/$qx/QtCore5Compat \
                                   @loader_path/QtCore5Compat.dylib $target
+
+        install_name_tool -change @rpath/QtQmlWorkerScript.framework/Versions/$qx/QtQmlWorkerScript \
+                                  @loader_path/QtQmlWorkerScript.dylib $target
     fi
 
     otool -L $target
@@ -570,15 +574,15 @@ elif [ $1 = "macOS" ]; then
     #----------------------------------------------------------------------------------------------
     # QtQml
 
-    if [ $qt = "qt6" ]; then
-
-        install_name_tool -change \
-                          @rpath/QtQmlWorkerScript.framework/Versions/$qx/QtQmlWorkerScript \
-                          @loader_path/../../QtQmlWorkerScript.dylib \
-                          QtQml/WorkerScript/libworkerscriptplugin.dylib
-
-        otool -L QtQml/WorkerScript/libworkerscriptplugin.dylib
-    fi
+    #if [ $qt = "qt6" ]; then
+    #
+    #    install_name_tool -change \
+    #                      @rpath/QtQmlWorkerScript.framework/Versions/$qx/QtQmlWorkerScript \
+    #                      @loader_path/../../QtQmlWorkerScript.dylib \
+    #                      QtQml/WorkerScript/libworkerscriptplugin.dylib
+    #
+    #    otool -L QtQml/WorkerScript/libworkerscriptplugin.dylib
+    #fi
 
     #----------------------------------------------------------------------------------------------
     # QtQuick
