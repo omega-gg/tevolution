@@ -150,9 +150,14 @@ unix:!ios:!android:LIBS += -L$$SK/lib -lvlc \
                            -L$$SK/lib -ltorrent-rasterbar \
                            -L$$SK/lib -lboost_system
 
+vlc4 {
+    ios:LIBS += -framework VLCKit
+} else {
+    ios:LIBS += -framework MobileVLCKit
+}
+
 # NOTE iOS: MediaPlayer is required for MP* classes.
-ios:LIBS += -framework MobileVLCKit \
-            -framework MediaPlayer
+ios:LIBS += -framework MediaPlayer
 
 android:LIBS += -L$$ANDROID_LIB -lvlc \
                 -L$$ANDROID_LIB -ltorrent-rasterbar \
@@ -230,7 +235,7 @@ OTHER_FILES += 3rdparty.sh \
                dist/android/qt6/gradle/wrapper/gradle-wrapper.properties \
 
 ios {
-    # NOTE iOS: This is required for MobileVLCKit.
+    # NOTE iOS: This is required for VLCKit.
     Q_ENABLE_BITCODE.name  = ENABLE_BITCODE
     Q_ENABLE_BITCODE.value = NO
 
@@ -243,8 +248,13 @@ ios {
     # NOTE iOS: We need to specify this in Info.plist.
     launch.files=$$_PRO_FILE_PWD_/dist/iOS/Launch.storyboard
 
-    framework.files = $$SK/lib/MobileVLCKit.framework
-    framework.path  = Frameworks
+    vlc4 {
+        framework.files = $$SK/lib/VLCKit.framework
+    } else {
+        framework.files = $$SK/lib/MobileVLCKit.framework
+    }
+
+    framework.path = Frameworks
 
     backend.files = $$_PRO_FILE_PWD_/dist/iOS/backend
 
