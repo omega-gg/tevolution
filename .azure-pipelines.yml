@@ -161,13 +161,13 @@ jobs:
 #     artifact: tevolution-android-qt5
 
 - job: android_qt6
- pool:
-   vmImage: "ubuntu-latest"
- steps:
- - bash: |
-     sh environment.sh qt6
-     sh build.sh android all
-     cd deploy
-     zip -rq ../tevolution.zip *
- - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
-   artifact: tevolution-android-qt6
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      sh environment.sh qt6
+      sh build.sh android all
+      cd deploy
+      zip -rq ../tevolution.zip *
+  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
+    artifact: tevolution-android-qt6
