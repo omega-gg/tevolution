@@ -288,7 +288,8 @@ elif [ $1 = "macOS" ]; then
 
         if [ $qt = "qt6" ]; then
 
-            cp "$path"/tls/libqopensslbackend.dylib $deploy/tls
+            cp "$path"/tls/libqopensslbackend.dylib         $deploy/tls
+            cp "$path"/tls/libqsecuretransportbackend.dylib $deploy/tls
         fi
 
         cp "$path"/$QtQuick/libqtquick2plugin.dylib $deploy/$QtQuick
