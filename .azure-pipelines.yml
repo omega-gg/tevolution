@@ -20,6 +20,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
+      sh environment.sh qt5
       sh build.sh win32 all
       cd deploy
       7z a ../tevolution.zip *
@@ -33,6 +34,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
+      sh environment.sh qt5
       sh build.sh win64 all
       cd deploy
       7z a ../tevolution.zip *
@@ -114,6 +116,7 @@ jobs:
                                      export DEBIAN_FRONTEND=noninteractive;
                                      apt-get update;
                                      apt-get -y install sudo curl zip git awscli;
+                                     sh environment.sh qt5;
                                      sh build.sh linux all;
                                      cd deploy;
                                      zip -rq ../tevolution.zip *;
