@@ -162,6 +162,8 @@ Item
         {
             window.fullScreen = true;
 
+            if (sk.isPortrait()) sk.forceLandscape(true);
+
             if (player.isPlaying == false) return;
 
             window.idle = true;
@@ -279,6 +281,8 @@ Item
         //              This could be related to the animation.
         window.maximized = false;
 //#END
+
+        sk.forceLandscape(false);
     }
 
     function pGetStep()
