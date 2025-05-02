@@ -162,7 +162,7 @@ Item
         {
             window.fullScreen = true;
 
-            if (sk.isPortrait()) sk.forceLandscape(true);
+            sk.requestLandscape(true);
 
             if (player.isPlaying == false) return;
 
@@ -282,7 +282,7 @@ Item
         window.maximized = false;
 //#END
 
-        sk.forceLandscape(false);
+        sk.requestLandscape(false);
     }
 
     function pGetStep()
