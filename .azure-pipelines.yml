@@ -69,6 +69,8 @@ jobs:
       sh build.sh macOS all
       cd deploy
       zip -rq ../tevolution.zip *
+      cd -
+      sh upload.sh macOS
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-macOS-qt6
 
