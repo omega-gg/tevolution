@@ -57,7 +57,7 @@ Item
     property bool pVersion: (step == 0 && online.version && online.version != sk.version)
 //#END
 
-    property int pSizeLoader: height / 128
+    property int pSizeLoader: Math.max(st.dp3, height / 128)
 
     property bool pAudio: (player.outputActive == AbstractBackend.OutputAudio || player.isAudio
                            ||
