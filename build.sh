@@ -281,7 +281,7 @@ fi
 #--------------------------------------------------------------------------------------------------
 
 echo "BUILDING $target"
-echo "---------------------"
+echo "-------------------"
 
 export QT_SELECT="$qt"
 
@@ -328,7 +328,7 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "iOS" ]; then
 
-    spec=macx-ios-clang
+    spec="macx-ios-clang"
 
     if [ $mobile = "device" ]; then
 
@@ -353,7 +353,7 @@ elif [ $1 = "android" ]; then
     export ANDROID_SDK_ROOT="$external/SDK/$SDK_version"
     export ANDROID_NDK_ROOT="$external/NDK/default"
 
-    export ANDROID_NDK_PLATFORM="android-$SDK_version"
+    export ANDROID_NDK_PLATFORM="android-$SDK_version_minimum"
 
     # NOTE android: This variable enforces the linux clang compiler.
     export ANDROID_NDK_HOST="linux-x86_64"
@@ -427,6 +427,7 @@ elif [ $1 = "iOS" ]; then
 
     # FIXME iOS: For some reason, we have to call this several times to build and deploy properly.
     if [ $qt = "qt5" ]; then
+
         make $make_arguments
         make $make_arguments
     else
@@ -462,7 +463,7 @@ fi
 
 cd ..
 
-echo "---------------------"
+echo "-------------------"
 
 #--------------------------------------------------------------------------------------------------
 # Deploying tevolution
@@ -472,9 +473,9 @@ if [ "$2" = "deploy" ]; then
 
     echo ""
     echo "DEPLOYING $target"
-    echo "----------------------"
+    echo "--------------------"
 
     sh deploy.sh $1
 
-    echo "----------------------"
+    echo "--------------------"
 fi
