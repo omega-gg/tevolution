@@ -462,7 +462,7 @@ void DataLocal::setTorrentCache(int cache)
     save();
 }
 
-#endif
+#endif // SK_NO_TORRENT
 
 //-------------------------------------------------------------------------------------------------
 
