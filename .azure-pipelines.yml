@@ -32,7 +32,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      sh environment.sh qt5
+      sh environment.sh qt6
       sh build.sh win64 all
       cd deploy
       7z a ../tevolution.zip *

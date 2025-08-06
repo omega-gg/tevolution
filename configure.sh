@@ -5,6 +5,8 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
+target="tevolution"
+
 Sky="../Sky"
 
 external="../3rdparty"
@@ -126,7 +128,7 @@ fi
 # MinGW
 #--------------------------------------------------------------------------------------------------
 
-echo "CONFIGURING tevolution"
+echo "CONFIGURING $target"
 echo "----------------------"
 
 if [ $compiler = "mingw" ]; then
