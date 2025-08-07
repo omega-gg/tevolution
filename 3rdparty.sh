@@ -43,6 +43,11 @@ if [ ! -d "Sky" ]; then
     git clone $source/Sky
 fi
 
+if [ ! -d "backend" ]; then
+
+    git clone $source/backend
+fi
+
 if [ ! -d "assets" ]; then
 
     git clone $source/assets
