@@ -359,7 +359,7 @@ ControllerCore::ControllerCore() : WController()
     //---------------------------------------------------------------------------------------------
     // Backends
 
-    QString path = _path + "/backend/";
+    QString path = _path + "/backend";
 
     if (QFile::exists(path) == false)
     {
@@ -406,7 +406,7 @@ ControllerCore::ControllerCore() : WController()
 
 /* Q_INVOKABLE */ void ControllerCore::resetBackends() const
 {
-    WControllerFileReply * reply = copyBackends(_path + "/backend/");
+    WControllerFileReply * reply = copyBackends(_path + "/backend");
 
     connect(reply, SIGNAL(complete(bool)), this, SLOT(onReload()));
 }
