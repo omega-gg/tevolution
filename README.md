@@ -4,7 +4,7 @@
 
 [tevolution](https://omega.gg/tevolution) is a [Remote Video Screen](https://omega.gg/about/RemoteVideoScreen).<br>
 Designed to take streaming requests from a [Semantic Player](https://omega.gg/about/SemanticPlayer).<br>
-Built for [Motion Freedom](https://omega.gg/about/MotionFreedom) and part of the [tevolution](https://omega.gg/about/tevolution) initiative.<br>
+Built for [Motion Freedom](https://omega.gg/about/MotionFreedom) and part of the [tevolution initiative](https://omega.gg/about/tevolution).<br>
 [omega](https://omega.gg/about) is building tevolution to empower people.<br>
 
 ## tevolution

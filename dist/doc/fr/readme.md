@@ -4,9 +4,11 @@
 
 #
 
-[tévolution] est un [Écran Vidéo Déporté] pensé pour la [Liberté Médiatique].
+[tévolution] est un [Écran Vidéo Déporté].
 
 Conçu pour traiter les requêtes de diffusion d'un Lecteur Sémantique.
+
+Pensé pour la [Liberté Médiatique] et partie intégrante de l'[initiative tévolution].
 
 [omega] développe tévolution au service de l'utilisateur.
 
@@ -66,13 +68,15 @@ Cette page: [https://omega.gg/tevolution/get/fr][page]
 
 ---
 
-tévolution: [https://omega.gg/tevolution/fr][tevolution]
+tévolution: [https://omega.gg/tevolution/fr][tévolution]
 
 Écran Vidéo Déporté: [https://omega.gg/about/RemoteVideoScreen/fr][Écran Vidéo Déporté]
 
 Lecteur Sémantique: [https://omega.gg/about/SemanticPlayer/fr][Lecteur Sémantique]
 
 Liberté Médiatique: [https://omega.gg/about/MotionFreedom/fr][Liberté Médiatique]
+
+initiative tévolution: [https://omega.gg/about/tevolution/fr][initiative tévolution]
 
 [tévolution]: https://omega.gg/tevolution/fr
 
@@ -81,6 +85,8 @@ Liberté Médiatique: [https://omega.gg/about/MotionFreedom/fr][Liberté Médiat
 [Lecteur Sémantique]: https://omega.gg/about/SemanticPlayer/fr
 
 [Liberté Médiatique]: https://omega.gg/about/MotionFreedom/fr
+
+[initiative tévolution]: https://omega.gg/about/tevolution/fr
 
 ---
 

@@ -8,7 +8,7 @@
 
 Designed to take streaming requests from a [Semantic Player].
 
-Built for [Motion Freedom] and part of the [tevolution] initiative.
+Built for [Motion Freedom] and part of the [tevolution initiative].
 
 [omega] is building tevolution to empower people.
 
@@ -71,9 +71,9 @@ Semantic Player: [https://omega.gg/about/SemanticPlayer][Semantic Player]
 
 Motion Freedom: [https://omega.gg/about/MotionFreedom][Motion Freedom]
 
-tevolution: [https://omega.gg/about/tevolution][tevolution]
+tevolution: [https://omega.gg/about/tevolution][tevolution initiative]
 
-[tevolution]: https://omega.gg/tevolution
+[tevolution initiative]: https://omega.gg/tevolution
 
 [Remote Video Screen]: https://omega.gg/about/RemoteVideoScreen
 
@@ -81,7 +81,7 @@ tevolution: [https://omega.gg/about/tevolution][tevolution]
 
 [Motion Freedom]: https://omega.gg/about/MotionFreedom
 
-[tevolution]: https://omega.gg/about/tevolution
+[tevolution initiative]: https://omega.gg/about/tevolution
 
 ---
 
