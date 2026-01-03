@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.1'
+        classpath 'com.android.tools.build:gradle:8.10.1'
     }
 }
 
@@ -38,6 +38,8 @@ android {
      * updated by QtCreator and androiddeployqt tools.
      * Changing them manually might break the compilation!
      *******************************************************/
+
+    namespace 'gg.omega.tevolution'
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
     buildToolsVersion androidBuildToolsVersion
@@ -88,4 +90,7 @@ android {
 
     // NOTE Qt5: This line was added manually to remove debug symbol(s).
     buildTypes.release.ndk.debugSymbolLevel "none"
+
+    // NOTE Qt5: This is required aidl support.
+    buildFeatures.aidl true
 }
