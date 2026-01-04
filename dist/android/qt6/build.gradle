@@ -39,7 +39,7 @@ android {
      * Changing them manually might break the compilation!
      *******************************************************/
 
-    namespace 'gg.omega.tevolution'
+    namespace 'gg.omega.tevolution.pro'
 
     compileSdkVersion androidCompileSdkVersion
     buildToolsVersion androidBuildToolsVersion
