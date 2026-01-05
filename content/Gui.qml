@@ -160,9 +160,11 @@ Item
     {
         if (window.fullScreen == false)
         {
-            window.fullScreen = true;
-
+            // NOTE android: We call this before applying fullScreen otherwise the cutout edges are
+            //               glitching.
             sk.requestLandscape(true);
+
+            window.fullScreen = true;
 
             if (player.isPlaying == false) return;
 
@@ -275,14 +277,14 @@ Item
 
     function pRestoreFullScreen()
     {
+        sk.requestLandscape(false);
+
         window.fullScreen = false;
 //#!MAC+!MOBILE
         // FIXME macOS: We can't go from full screen to normal window right away.
         //              This could be related to the animation.
         window.maximized = false;
 //#END
-
-        sk.requestLandscape(false);
     }
 
     function pGetStep()
