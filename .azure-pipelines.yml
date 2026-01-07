@@ -148,31 +148,32 @@ jobs:
 
 # NOTE android: Stick to Qt5 until the TextInput is fixed.
 #               https://bugreports.qt.io/browse/QTBUG-134417
-- job: android_qt5
-  pool:
-    vmImage: "ubuntu-latest"
-  steps:
-  - bash: |
-      sh environment.sh qt5
-      sh build.sh android all
-      cd deploy
-      zip -rq ../tevolution.zip *
-      cd -
-      sh upload.sh android
-  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
-    artifact: tevolution-android-qt5
-
-# - job: android_qt6
-#   timeoutInMinutes: 120
+# - job: android_qt5
 #   pool:
 #     vmImage: "ubuntu-latest"
 #   steps:
 #   - bash: |
-#       sh environment.sh qt6
+#       sh environment.sh qt5
 #       sh build.sh android all
 #       cd deploy
 #       zip -rq ../tevolution.zip *
 #       cd -
 #       sh upload.sh android
 #   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
-#     artifact: tevolution-android-qt6
+#     artifact: tevolution-android-qt5
+
+- job: android_qt6
+  timeoutInMinutes: 120
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      sh environment.sh qt6
+      sh environment.sh storageLight
+      sh build.sh android all
+      cd deploy
+      zip -rq ../tevolution.zip *
+      cd -
+      sh upload.sh android
+  - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
+    artifact: tevolution-android-qt6
