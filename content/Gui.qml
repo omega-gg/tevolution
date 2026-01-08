@@ -744,6 +744,11 @@ Item
         anchors.right : parent.right
         anchors.bottom: parent.bottom
 
+//#QT_6:ANDROID
+        // NOTE Qt6: We want the loading bar to appear above the OS controls.
+        anchors.bottomMargin: gui.SafeArea.margins.bottom
+//#END
+
         height: pSizeLoader
 
         opacity: (player.isPlaying && player.isLoading) ? 0.8 : 0.0
