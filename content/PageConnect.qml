@@ -107,7 +107,7 @@ Item
 
         asynchronous: true
 
-        Image
+        SkyImage
         {
             id: imageTag
 
