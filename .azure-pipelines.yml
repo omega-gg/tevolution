@@ -36,8 +36,6 @@ jobs:
       sh build.sh win64 all
       cd deploy
       7z a ../tevolution.zip *
-      cd -
-      sh upload.sh win64
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-win64-qt6
 
@@ -65,8 +63,6 @@ jobs:
       sh build.sh macOS all
       cd deploy
       zip -rq ../tevolution.zip *
-      cd -
-      sh upload.sh macOS
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-macOS-qt6
 
@@ -136,9 +132,7 @@ jobs:
                                      sh environment.sh qt6;
                                      sh build.sh linux all;
                                      cd deploy;
-                                     zip -rq ../tevolution.zip *;
-                                     cd -;
-                                     sh upload.sh linux64"
+                                     zip -rq ../tevolution.zip *"
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-linux64-qt6
 
@@ -157,8 +151,6 @@ jobs:
 #       sh build.sh android all
 #       cd deploy
 #       zip -rq ../tevolution.zip *
-#       cd -
-#       sh upload.sh android
 #   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #     artifact: tevolution-android-qt5
 
@@ -173,7 +165,5 @@ jobs:
       sh build.sh android all
       cd deploy
       zip -rq ../tevolution.zip *
-      cd -
-      sh upload.sh android
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-android-qt6

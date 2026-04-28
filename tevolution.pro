@@ -196,7 +196,6 @@ OTHER_FILES += 3rdparty.sh \
                configure.sh \
                build.sh \
                deploy.sh \
-               upload.sh \
                environment.sh \
                README.md \
                AUTHORS.md \
