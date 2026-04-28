@@ -76,7 +76,7 @@ Deploy the application and its dependencies:
 
 ## License
 
-Copyright (C) 2015 - 2024 tevolution authors | https://omega.gg/tevolution
+Copyright (C) 2020-2026 tevolution authors | https://omega.gg/tevolution
 
 ### Authors
 
