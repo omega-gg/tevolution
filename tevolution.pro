@@ -198,6 +198,7 @@ OTHER_FILES += 3rdparty.sh \
                deploy.sh \
                environment.sh \
                README.md \
+               LICENSE.md \
                AUTHORS.md \
                .azure-pipelines.yml \
                content/generate.sh \
