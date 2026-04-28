@@ -1,6 +1,8 @@
 <a href="https://omega.gg/tevolution"><img src="dist/icon.png" alt="tevolution" width="128px"></a>
 ---
+[![Discord](https://img.shields.io/discord/705770212485496852)](https://omega.gg/discord)
 [![azure](https://dev.azure.com/bunjee/tevolution/_apis/build/status/omega-gg.tevolution)](https://dev.azure.com/bunjee/tevolution/_build)
+[![GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl.html)
 
 [tevolution](https://omega.gg/tevolution) is a [Remote Video Screen](https://omega.gg/about/RemoteVideoScreen).<br>
 Designed to take streaming requests from a [Semantic Player](https://omega.gg/about/SemanticPlayer).<br>
