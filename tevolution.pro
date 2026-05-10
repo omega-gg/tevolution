@@ -54,6 +54,10 @@ DEFINES += QUAZIP_BUILD \
 
 ios:DEFINES += SK_NO_TORRENT
 
+win32|macx:contains(QT_MAJOR_VERSION, 6) {
+    DEFINES += QWK_CORE_LIBRARY QWK_QUICK_LIBRARY
+}
+
 win32-msvc* {
     # libtorrent: This fixes the winsock2 and std::min errors.
     DEFINES += WIN32_LEAN_AND_MEAN NOMINMAX
@@ -66,13 +70,8 @@ win32-msvc* {
 
 #DEFINES += SK_SOFTWARE
 
-contains(QT_MAJOR_VERSION, 4) {
-    CONFIG(release, debug|release) {
-
-        win32:DEFINES += SK_WIN_NATIVE
-    }
-} else {
-    win32:DEFINES += SK_WIN_NATIVE
+win32|macx:contains(QT_MAJOR_VERSION, 6) {
+    DEFINES += SK_WINDOW_NATIVE
 }
 
 deploy|ios|android {
@@ -109,6 +108,10 @@ include(src/3rdparty/quazip/quazip.pri)
 include(src/3rdparty/libcharsetdetect/libcharsetdetect.pri)
 include(src/3rdparty/zxing-cpp/zxing-cpp.pri)
 
+win32|macx:contains(QT_MAJOR_VERSION, 6) {
+    include(src/3rdparty/qwindowkit/qwindowkit.pri)
+}
+
 INCLUDEPATH += $$SK/include/SkCore \
                $$SK/include/SkGui \
                $$SK/include/SkBarcode \
@@ -137,11 +140,21 @@ unix:!macx:!ios:!android:greaterThan(QT_MAJOR_VERSION, 4) {
     INCLUDEPATH += $$SK/include/$$QTX/QtDBus
 }
 
+win32|macx:contains(QT_MAJOR_VERSION, 6) {
+    INCLUDEPATH += $$SK/include/SkGui/QWKCore \
+                   $$SK/include/SkGui/QWKCore/private \
+                   $$SK/include/SkGui/QWKQuick \
+                   $$SK/include/SkGui/QWKQuick/private
+}
+
 win32:LIBS += -L$$SK/lib -llibvlc \
               -lws2_32
 
 win32:LIBS += -L$$SK/lib -ltorrent \
               -L$$SK/lib -lboost_system
+
+# Windows dependency for qwindowkit
+win32:LIBS += -lgdi32
 
 # Windows dependency for ShellExecuteA and PostMessage
 win32-msvc*:LIBS += shell32.lib User32.lib
