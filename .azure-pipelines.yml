@@ -50,7 +50,7 @@ jobs:
 #   - bash: |
 #       sh build.sh macOS all
 #       cd deploy
-#       zip -rq ../tevolution.zip *
+#       zip -rqy ../tevolution.zip *
 #   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #     artifact: tevolution-macOS-qt5
 
@@ -62,7 +62,7 @@ jobs:
       sh environment.sh qt6
       sh build.sh macOS all
       cd deploy
-      zip -rq ../tevolution.zip *
+      zip -rqy ../tevolution.zip *
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-macOS-qt6
 
@@ -78,7 +78,7 @@ jobs:
 #   - bash: |
 #       sh build.sh iOS all
 #       cd deploy
-#       zip -rq ../tevolution.zip *
+#       zip -rqy ../tevolution.zip *
 #   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #     artifact: tevolution-iOS-qt5
 
@@ -91,7 +91,7 @@ jobs:
       sh environment.sh qt6
       sh build.sh iOS all
       cd deploy
-      zip -rq ../tevolution.zip *
+      zip -rqy ../tevolution.zip *
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-iOS-qt6
 
@@ -114,7 +114,7 @@ jobs:
                                      sh environment.sh qt5;
                                      sh build.sh linux all;
                                      cd deploy;
-                                     zip -rq ../tevolution.zip *"
+                                     zip -rqy ../tevolution.zip *"
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-linux32-qt5
 
@@ -134,7 +134,7 @@ jobs:
                                      sh environment.sh qt6;
                                      sh build.sh linux all;
                                      cd deploy;
-                                     zip -rq ../tevolution.zip *"
+                                     zip -rqy ../tevolution.zip *"
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-linux64-qt6
 
@@ -152,7 +152,7 @@ jobs:
 #       sh environment.sh qt5
 #       sh build.sh android all
 #       cd deploy
-#       zip -rq ../tevolution.zip *
+#       zip -rqy ../tevolution.zip *
 #   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
 #     artifact: tevolution-android-qt5
 
@@ -166,6 +166,6 @@ jobs:
       sh environment.sh storageLight
       sh build.sh android all
       cd deploy
-      zip -rq ../tevolution.zip *
+      zip -rqy ../tevolution.zip *
   - publish: $(System.DefaultWorkingDirectory)/tevolution.zip
     artifact: tevolution-android-qt6
